@@ -29,14 +29,24 @@ public class Address implements Serializable {
     @OneToMany(mappedBy = "address")
     private List<InfoEntity> infoEntities = new ArrayList();
 
-    public Address(String street, CityInfo additionalInfo) {
+    public Address(String street, CityInfo cityinfo) {
         this.street = street;
-        this.cityinfo = additionalInfo;
+        this.cityinfo = cityinfo;
     }
     
     public Address() {
 
     }
+
+    public CityInfo getCityinfo() {
+        return cityinfo;
+    }
+
+    public void setCityinfo(CityInfo cityinfo) {
+        this.cityinfo = cityinfo;
+    }
+
+   
 
    
 
@@ -62,13 +72,7 @@ public class Address implements Serializable {
         this.street = street;
     }
 
-    public CityInfo getAdditionalInfo() {
-        return cityinfo;
-    }
 
-    public void setAdditionalInfo(CityInfo additionalInfo) {
-        this.cityinfo = additionalInfo;
-    }
 
     public void setId(Long id) {
         this.id = id;

@@ -13,69 +13,85 @@ import javax.persistence.Query;
 import org.fluttercode.datafactory.impl.DataFactory;
 
 public class TestDataGenerator {
-
-    InfoEntity ie = new InfoEntity() {
-    };
-    Person p;
+    
     DataFactory df = new DataFactory();
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
-
-    EntityManager em = emf.createEntityManager();
-
-    EntityManager em2 = emf.createEntityManager();
-
-    List<Person> persons = new ArrayList<>();
+    
     Address a = new Address();
-    Address b;
-    CityInfo ci;
-
-    public List<CityInfo> getCityInfo(EntityManager em) {
-        em.getTransaction().begin();
+    
+    public List<CityInfo> getCityInfo(EntityManager em) throws ClassCastException {
+        List<CityInfo> cities2 = new ArrayList<>();
+        
+        List<CityInfo> cities = new ArrayList<>();
         Query q = em.createQuery("select c from CityInfo c");
-        List<CityInfo> cities = q.getResultList();
-        em.close();
-        return cities;
-
+        
+        CityInfo ci;
+        cities = q.getResultList();
+        for (int i = 0; i < cities.size(); i++) {
+            ci = new CityInfo(cities.get(i).getZip(), cities.get(i).getCity());
+            cities2.add(ci);
+        }
+        
+        return cities2;
+        
     }
-
-    public List<Address> createTestAddresses(EntityManager em) {
-
-        em.getTransaction().begin();
-        for (int i = 0; i < 100; i++) {
+    
+    public void createTestAddresses(EntityManager em) {
+       
+        Address b;
+       
+        for (int i = 0; i < 49; i++) {
             b = new Address(df.getStreetName(), getCityInfo(em).get(i));
-            em.persist(ie);
-
-            em.getTransaction().commit();
-            em.close();
+            em.persist(b);
+          
+      
+          
+        }  em.getTransaction().commit();
+    }
+    
+     public List<Address> getAddresses(EntityManager em) throws ClassCastException {
+        List<Address> adds = new ArrayList<>();
+        
+        List<Address> addressers = new ArrayList<>();
+        Query q = em.createQuery("select a from Address a");
+        
+        Address ci;
+        adds = q.getResultList();
+        for (int i = 0; i < adds.size(); i++) {
+            ci = new Address(adds.get(i).getStreet(), adds.get(i).getCityinfo());
+          
         }
-//String firstName, String lastname, Address address, String email
-        return null;
+  
+        return adds;
+        
+    }
+    
+    public void createTestPersons(EntityManager em) {
+        InfoEntity ie;
+  
+        for (int i = 0; i < 49; i++) {
+            ie = new Person(df.getFirstName(), df.getLastName(),getAddresses(em).get(i), df.getEmailAddress());
+            em.persist(ie);
+        
+       
+          
+        }em.getTransaction().commit();
 
     }
-
-    public List<String> createTestPersons(EntityManager em) {
-        em.getTransaction().begin();
-        for (int i = 0; i < 100; i++) {
-            ie = new Person(df.getFirstName(), df.getLastName(), a, df.getEmailAddress());
-            em.persist(ie);
-
-            em.getTransaction().commit();
-            em.close();
-        }
-//String firstName, String lastname, Address address, String email
-        return null;
-
-    }
-
+    
     public static void main(String[] args) {
- EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
-
-    EntityManager em = emf.createEntityManager();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
+        
+        EntityManager em = emf.createEntityManager();
         TestDataGenerator tdg = new TestDataGenerator();
-        tdg.getCityInfo(em);
-        tdg.createTestAddresses(em);
-        tdg.createTestPersons(em);
-
+    
+          
+            em.getTransaction().begin();
+            System.out.println(tdg.getCityInfo(em));        
+            tdg.createTestAddresses(em);
+            em.getTransaction().begin();
+            tdg.createTestPersons(em);
+            
+       
+        
     }
-
 }
