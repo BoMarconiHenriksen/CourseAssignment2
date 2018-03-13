@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ import javax.persistence.ManyToMany;
  *
  * @author Mantzius Lykke
  */
+@DiscriminatorValue("Person")
 @Entity
 public class Person extends InfoEntity implements Serializable {
 

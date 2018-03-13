@@ -21,6 +21,7 @@ public class Address implements Serializable {
     //Denne referer til cityInfo. Mange Address kender en CityInfo
     @ManyToOne
     private CityInfo additionalInfo;
+   
     @OneToMany(mappedBy = "address")//Denne referer til InfoEntity. En Address kender Mange InfoEntity
     private List<InfoEntity> infoEntities = new ArrayList();
 
