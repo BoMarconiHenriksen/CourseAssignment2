@@ -12,20 +12,20 @@ public class AddressFacade {
    EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
      EntityManager em = emf.createEntityManager();
   
-    public Pet findPet(int petId) {
+    public Address findAddress(long id) {
        
-        Query q = em.createNamedQuery("Pet.findById");
-        q.setParameter("id",petId);
-        Pet p = (Pet) q.getSingleResult();
-        return p;
+        Query q = em.createNamedQuery("Cityinfo.findAll");
+        q.setParameter("id", getzip());
+        Address addr = (Address) q.getSingleResult();
+        return addr;
     }
      
  
-    public List<Pet> getAllPets() {
+    public List<Address> getzip() {
        
-        Query q = em.createQuery("select p from Pet p");
-        List<Pet> pets = q.getResultList();
-        return pets;
+        Query q = em.createQuery("SELECT c FROM Cityinfo c");
+        List<Address> addr = q.getResultList();
+        return addr;
         
         
     }
