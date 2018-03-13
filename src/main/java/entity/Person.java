@@ -37,6 +37,11 @@ public class Person extends InfoEntity implements Serializable {
         this.hobbycCollection = hobbycCollection;
     }
 
+    public Person() {
+    }
+    
+    
+
     public String getFirstName() {
         return firstName;
     }

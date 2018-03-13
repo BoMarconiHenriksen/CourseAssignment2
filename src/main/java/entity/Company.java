@@ -30,6 +30,11 @@ public class Company extends InfoEntity implements Serializable {
         this.marketValue = marketValue;
     }
 
+    public Company() {
+    }
+
+    
+    
     public String getName() {
         return name;
     }

@@ -43,6 +43,11 @@ public class Hobby extends InfoEntity implements Serializable {
         this.personCollection = personCollection;
     }
 
+    public Hobby() {
+    }
+
+    
+    
     public Long getId() {
         return id;
     }
