@@ -21,7 +21,12 @@ import javax.persistence.ManyToMany;
  */
 @Entity
 public class Hobby extends InfoEntity implements Serializable {
-
+    
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    
     @Column(name = "name")
     private String name;
     @Column(name = "description")
@@ -31,10 +36,19 @@ public class Hobby extends InfoEntity implements Serializable {
     private Collection<Person> personCollection;
     //private ArrayList<Person> personList;// = new ArrayList();
 
-    public Hobby(String name, String description, Collection<Person> personCollection) {
+    public Hobby(Long id, String name, String description, Collection<Person> personCollection) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.personCollection = personCollection;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
