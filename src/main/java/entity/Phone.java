@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @DiscriminatorValue("Phone")
 @Entity
@@ -19,6 +20,9 @@ public class Phone implements Serializable {
 
     private int number;
     private String description;
+    //Mange Phone kender en InfoEntity.
+    @ManyToOne
+    private InfoEntity infoEntity;
 
     public Phone(int number, String description) {
         this.number = number;
@@ -28,6 +32,16 @@ public class Phone implements Serializable {
     public Phone() {
         
     }
+
+    public InfoEntity getInfoEntity() {
+        return infoEntity;
+    }
+
+    public void setInfoEntity(InfoEntity infoEntity) {
+        this.infoEntity = infoEntity;
+    }
+    
+    
 
     public Long getId() {
         return id;

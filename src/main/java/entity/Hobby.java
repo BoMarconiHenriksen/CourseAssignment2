@@ -20,7 +20,7 @@ import javax.persistence.ManyToMany;
  * @author Mantzius Lykke
  */
 @Entity
-public class Hobby extends InfoEntity implements Serializable {
+public class Hobby implements Serializable {
     
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,11 +36,14 @@ public class Hobby extends InfoEntity implements Serializable {
     private Collection<Person> personCollection;
     //private ArrayList<Person> personList;// = new ArrayList();
 
-    public Hobby(Long id, String name, String description, Collection<Person> personCollection) {
-        this.id = id;
+    public Hobby(String name, String description, Collection<Person> personCollection) {
         this.name = name;
         this.description = description;
         this.personCollection = personCollection;
+    }
+    
+    public Hobby() {
+        
     }
 
     public Long getId() {
