@@ -32,22 +32,22 @@ public class Hobby implements Serializable {
     @Column(name = "description")
     private String description;
     
-    @ManyToMany(mappedBy = "hobbyCollection")
-    private Collection<Person> personCollection;
+//    @ManyToMany(mappedBy = "hobbyCollection")
+//    private Collection<Person> personCollection;
     //private ArrayList<Person> personList;// = new ArrayList();
 
 
-    public Hobby(String name, String description, Collection<Person> personCollection) {
+    public Hobby(String name, String description) {
 
         this.name = name;
         this.description = description;
-        this.personCollection = personCollection;
+//        this.personCollection = personCollection;
     }
 
-    public Hobby() {
-    }
     
-   
+    public Hobby() {
+        
+    }
 
     public Long getId() {
         return id;

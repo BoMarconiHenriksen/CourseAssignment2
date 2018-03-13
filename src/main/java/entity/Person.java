@@ -42,8 +42,11 @@ public class Person extends InfoEntity implements Serializable {
         super(address, email);
     }
 
+    public Person() {
+    }
 
-  
+
+
 
     public String getFirstName() {
         return firstName;

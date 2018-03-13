@@ -26,6 +26,8 @@ public class CityInfo  implements Serializable {
         this.city = city;
     }
 
+    public CityInfo() {
+    }
   
     public int getZip() {
         return zip;
@@ -34,11 +36,10 @@ public class CityInfo  implements Serializable {
     public void setZip(int zip) {
         this.zip = zip;
 
-        
     }
 
-   
 
+   
     public List<Address> getAddresses() {
         return addresses;
     }
@@ -47,7 +48,6 @@ public class CityInfo  implements Serializable {
         this.addresses = addresses;
     }
     
-  
 
     public String getCity() {
         return city;

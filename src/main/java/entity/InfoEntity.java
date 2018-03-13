@@ -1,4 +1,3 @@
-
 package entity;
 
 import java.io.Serializable;
@@ -14,12 +13,15 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
 @Entity
-@DiscriminatorColumn(name="INFOTYPE")
+@DiscriminatorColumn(name = "INFOTYPE")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class InfoEntity implements Serializable {
     
+ private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
     //Mange InfoEntity kender en Address
     @ManyToOne
     private Address address;
@@ -27,14 +29,12 @@ public abstract class InfoEntity implements Serializable {
     @OneToMany(mappedBy = "infoEntity")
     private List<Phone> phones = new ArrayList();
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   
 
-     Long id;
-
-    
     private String email;
+
+    public InfoEntity() {
+    }
 
     public InfoEntity(Address address, String email) {
         this.address = address;
@@ -64,9 +64,6 @@ public abstract class InfoEntity implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
-
 
     public Long getId() {
         return id;
@@ -100,5 +97,5 @@ public abstract class InfoEntity implements Serializable {
     public String toString() {
         return "entity.InfoEntity[ id=" + id + " ]";
     }
-    
+
 }
