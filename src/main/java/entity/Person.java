@@ -31,12 +31,13 @@ public class Person extends InfoEntity implements Serializable {
     private Collection<Hobby> hobbycCollection;
     //private ArrayList<Hobby> hobbyList; //= new ArrayList();
 
-    public Person(String firstName, String lastname, Collection<Hobby> hobbycCollection) {
+    public Person(String firstName, String lastname, Collection<Hobby> hobbycCollection, Address address, String email) {
+        super(address, email);
         this.firstName = firstName;
         this.lastname = lastname;
         this.hobbycCollection = hobbycCollection;
     }
-
+    
     public String getFirstName() {
         return firstName;
     }
