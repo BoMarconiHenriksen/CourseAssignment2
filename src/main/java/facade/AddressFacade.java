@@ -14,16 +14,16 @@ public class AddressFacade {
   
     public Address findAddress(long id) {
        
-        Query q = em.createNamedQuery("Cityinfo.findAll");
-        q.setParameter("id", getzip());
+        Query q = em.createNamedQuery("Address.findAll");
+        q.setParameter("id", getAddresses());
         Address addr = (Address) q.getSingleResult();
         return addr;
     }
      
  
-    public List<Address> getzip() {
+    public List<Address> getAddresses() {
        
-        Query q = em.createQuery("SELECT c FROM Cityinfo c");
+        Query q = em.createQuery("SELECT c FROM Address c");
         List<Address> addr = q.getResultList();
         return addr;
         
@@ -31,8 +31,8 @@ public class AddressFacade {
     }
     
    
-    public int petCount(){
-        Query q = em.createQuery("select count(*) from Pet");
+    public int AddressCount(){
+        Query q = em.createQuery("select count(*) from Address");
         int count = (int) q.getSingleResult();
         return count;
     }
