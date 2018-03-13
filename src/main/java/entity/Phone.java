@@ -10,7 +10,12 @@ import javax.persistence.Id;
 
 @DiscriminatorValue("Phone")
 @Entity
-public class Phone extends InfoEntity implements Serializable {
+public class Phone implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private int number;
     private String description;
@@ -19,7 +24,19 @@ public class Phone extends InfoEntity implements Serializable {
         this.number = number;
         this.description = description;
     }
+    
+    public Phone() {
+        
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public int getNumber() {
         return number;
     }
