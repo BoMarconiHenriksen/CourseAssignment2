@@ -6,14 +6,10 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 /**
@@ -45,6 +41,12 @@ public class Person extends InfoEntity implements Serializable {
     }
 
     public Person() {
+    }
+
+    public Person(String firstName, String lastname, Address address, String email) {
+        super(address, email);
+        this.firstName = firstName;
+        this.lastname = lastname;
     }
 
 
