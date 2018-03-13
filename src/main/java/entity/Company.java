@@ -22,7 +22,8 @@ public class Company extends InfoEntity implements Serializable {
     private int numEmployees;
     private int marketValue;
 
-    public Company(String name, String description, int cvr, int numEmployees, int marketValue) {
+    public Company(String name, String description, int cvr, int numEmployees, int marketValue, Address address, String email) {
+        super(address, email);
         this.name = name;
         this.description = description;
         this.cvr = cvr;
@@ -30,8 +31,12 @@ public class Company extends InfoEntity implements Serializable {
         this.marketValue = marketValue;
     }
 
-    public Company() {
+    public Company(Address address, String email) {
+        super(address, email);
     }
+    
+
+   
 
     public String getName() {
         return name;

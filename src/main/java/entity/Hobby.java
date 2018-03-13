@@ -20,7 +20,7 @@ import javax.persistence.ManyToMany;
  * @author Mantzius Lykke
  */
 @Entity
-public class Hobby extends InfoEntity implements Serializable {
+public class Hobby implements Serializable {
     
     private static final long serialVersionUID = 1L;
     @Id
@@ -31,20 +31,23 @@ public class Hobby extends InfoEntity implements Serializable {
     private String name;
     @Column(name = "description")
     private String description;
-//    
-//    @ManyToMany(mappedBy = "hobbyCollection")
-//    private Collection<Person> personCollection;
-//    //private ArrayList<Person> personList;// = new ArrayList();
+    
+    @ManyToMany(mappedBy = "hobbyCollection")
+    private Collection<Person> personCollection;
+    //private ArrayList<Person> personList;// = new ArrayList();
 
-    public Hobby( String name, String description) {
-//        this.id = id;
+
+    public Hobby(String name, String description, Collection<Person> personCollection) {
+
         this.name = name;
         this.description = description;
-//        this.personCollection = personCollection;
+        this.personCollection = personCollection;
     }
 
     public Hobby() {
     }
+    
+   
 
     public Long getId() {
         return id;
