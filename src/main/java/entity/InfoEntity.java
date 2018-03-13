@@ -22,16 +22,16 @@ public abstract class InfoEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    
     //Mange InfoEntity kender en Address
     @ManyToOne
     private Address address;
-   
-    private String email;
+    
     //En InfoEntity kender mange Phone.
     @OneToMany(mappedBy = "infoEntity")
     private List<Phone> phones = new ArrayList();
-    @OneToMany
-    private List<Address> addresses = new ArrayList();
+
+    private String email;
 
     public InfoEntity() {
     }
@@ -95,7 +95,7 @@ public abstract class InfoEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.InfoEntity[ id=" + id + " ]";
+        return "InfoEntity{" + "id=" + id + ", address=" + address + ", phones=" + phones + ", email=" + email + '}';
     }
 
 }

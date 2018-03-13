@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -18,32 +15,37 @@ import javax.persistence.Id;
  */
 @Entity
 public class Hobby implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(name = "name")
     private String name;
     @Column(name = "description")
     private String description;
-    
-//    @ManyToMany(mappedBy = "hobbyCollection")
-//    private Collection<Person> personCollection;
-    //private ArrayList<Person> personList;// = new ArrayList();
 
+    //Mange Hobby kender mange Person
+    @ManyToMany(mappedBy = "hobbies")
+    private List<Person> persons;
 
-    public Hobby(String name, String description) {
-
+    public Hobby(String name, String description, List<Person> persons) {
         this.name = name;
         this.description = description;
-//        this.personCollection = personCollection;
+        this.persons = persons;
     }
 
-    
     public Hobby() {
-        
+
+    }
+
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
     }
 
     public Long getId() {
@@ -69,7 +71,8 @@ public class Hobby implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
- @Override
+
+    @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof InfoEntity)) {
@@ -84,8 +87,7 @@ public class Hobby implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.InfoEntity[ id=" + id + " ]";
+        return "Hobby{" + "id=" + id + ", name=" + name + ", description=" + description + ", persons=" + persons + '}';
     }
-    
-}
 
+}
