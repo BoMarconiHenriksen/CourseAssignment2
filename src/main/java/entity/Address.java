@@ -15,15 +15,25 @@ import javax.persistence.OneToMany;
 @Entity
 public class Address implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String street;
+    
     //Denne referer til cityInfo. Mange Address kender en CityInfo
     @ManyToOne
     private CityInfo additionalInfo;
-    @OneToMany(mappedBy = "address")//Denne referer til InfoEntity. En Address kender Mange InfoEntity
+    
+    //Denne referer til InfoEntity. En Address kender Mange InfoEntity
+    @OneToMany(mappedBy = "address")
     private List<InfoEntity> infoEntities = new ArrayList();
 
+    public Address(String street, CityInfo additionalInfo) {
+        this.street = street;
+        this.additionalInfo = additionalInfo;
+    }
+    
     public Address() {
 
     }
@@ -60,5 +70,12 @@ public class Address implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" + "id=" + id + ", street=" + street + ", additionalInfo=" + additionalInfo + ", infoEntities=" + infoEntities + '}';
+    }
+    
+    
 
 }

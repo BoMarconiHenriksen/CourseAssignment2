@@ -17,19 +17,19 @@ import javax.persistence.OneToMany;
 @DiscriminatorColumn(name = "INFOTYPE")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class InfoEntity implements Serializable {
-    
- private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    
     //Mange InfoEntity kender en Address
     @ManyToOne
     private Address address;
+    
     //En InfoEntity kender mange Phone.
     @OneToMany(mappedBy = "infoEntity")
     private List<Phone> phones = new ArrayList();
-
-   
 
     private String email;
 
@@ -95,7 +95,7 @@ public abstract class InfoEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.InfoEntity[ id=" + id + " ]";
+        return "InfoEntity{" + "id=" + id + ", address=" + address + ", phones=" + phones + ", email=" + email + '}';
     }
 
 }

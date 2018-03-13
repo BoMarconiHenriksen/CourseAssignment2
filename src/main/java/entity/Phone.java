@@ -13,7 +13,9 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Phone implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int number;
     private String description;
     //Mange Phone kender en InfoEntity.
@@ -36,18 +38,6 @@ public class Phone implements Serializable {
         this.infoEntity = infoEntity;
     }
     
-    
-
-    
-
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-    
     public int getNumber() {
         return number;
     }
@@ -64,13 +54,9 @@ public class Phone implements Serializable {
         this.description = description;
     }
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    @Override
+    public String toString() {
+        return "Phone{" + "number=" + number + ", description=" + description + ", infoEntity=" + infoEntity + '}';
+    }
 
-    
 }
