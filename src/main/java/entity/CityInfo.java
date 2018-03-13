@@ -8,39 +8,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class CityInfo implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class CityInfo  implements Serializable {
 
-    private int zipCode;
+  
+    @Id
+    private int zip;
     private String city;
 
-    public CityInfo(int zipCode, String city) {
-        this.zipCode = zipCode;
+    public CityInfo(int zip, String city) {
+        this.zip = zip;
         this.city = city;
     }
 
     public CityInfo() {
-        
-    }
-    
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public int getZip() {
-        return zipCode;
+        return zip;
     }
 
     public void setZip(int zip) {
-        this.zipCode = zip;
+        this.zip = zip;
     }
 
     public String getCity() {
@@ -50,13 +38,6 @@ public class CityInfo implements Serializable {
     public void setCity(String city) {
         this.city = city;
     }
-
-    @Override
-    public String toString() {
-        return "CityInfo{" + "id=" + id + ", zip=" + zipCode + ", city=" + city + '}';
-    }
-    
-    
 
  
     

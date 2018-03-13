@@ -31,16 +31,19 @@ public class Hobby extends InfoEntity implements Serializable {
     private String name;
     @Column(name = "description")
     private String description;
-    
-    @ManyToMany(mappedBy = "hobbyCollection")
-    private Collection<Person> personCollection;
-    //private ArrayList<Person> personList;// = new ArrayList();
+//    
+//    @ManyToMany(mappedBy = "hobbyCollection")
+//    private Collection<Person> personCollection;
+//    //private ArrayList<Person> personList;// = new ArrayList();
 
-    public Hobby(Long id, String name, String description, Collection<Person> personCollection) {
-        this.id = id;
+    public Hobby( String name, String description) {
+//        this.id = id;
         this.name = name;
         this.description = description;
-        this.personCollection = personCollection;
+//        this.personCollection = personCollection;
+    }
+
+    public Hobby() {
     }
 
     public Long getId() {
@@ -66,15 +69,23 @@ public class Hobby extends InfoEntity implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Collection<Person> getPersonCollection() {
-        return personCollection;
+ @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof InfoEntity)) {
+            return false;
+        }
+        InfoEntity other = (InfoEntity) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
-    public void setPersonCollection(Collection<Person> personCollection) {
-        this.personCollection = personCollection;
+    @Override
+    public String toString() {
+        return "entity.InfoEntity[ id=" + id + " ]";
     }
-
-    
     
 }
+
