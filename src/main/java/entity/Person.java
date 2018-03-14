@@ -8,17 +8,17 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 /**
  *
  * @author Mantzius Lykke
  */
+@DiscriminatorValue("Person")
 @Entity
 public class Person extends InfoEntity implements Serializable {
 
@@ -27,17 +27,42 @@ public class Person extends InfoEntity implements Serializable {
     @Column(name = "lastName")
     private String lastname;
     
+    //Mange Person kender mange Hobby
+    
     @ManyToMany
-    private Collection<Hobby> hobbycCollection;
-    //private ArrayList<Hobby> hobbyList; //= new ArrayList();
+    private List<Hobby> hobbies = new ArrayList();
 
-    public Person(String firstName, String lastname, Collection<Hobby> hobbycCollection, Address address, String email) {
+    public Person(String firstName, String lastname) {
+        this.firstName = firstName;
+        this.lastname = lastname;
+    }
+
+    public Person(String firstName, String lastname, Address address, String email) {
         super(address, email);
         this.firstName = firstName;
         this.lastname = lastname;
-        this.hobbycCollection = hobbycCollection;
     }
-    
+
+    public List<Hobby> getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(List<Hobby> hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public Person(Address address, String email) {
+        super(address, email);
+    }
+
+    public Person() {
+    }
+
+   
+
+
+
+
     public String getFirstName() {
         return firstName;
     }
@@ -54,15 +79,9 @@ public class Person extends InfoEntity implements Serializable {
         this.lastname = lastname;
     }
 
-    public Collection<Hobby> getHobbycCollection() {
-        return hobbycCollection;
+    @Override
+    public String toString() {
+        return "Person{" + "firstName=" + firstName + ", lastname=" + lastname + ", hobbies=" + hobbies + '}';
     }
-
-    public void setHobbycCollection(Collection<Hobby> hobbycCollection) {
-        this.hobbycCollection = hobbycCollection;
-    }
-
-    
-    
     
 }

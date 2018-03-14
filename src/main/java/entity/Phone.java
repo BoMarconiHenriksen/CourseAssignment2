@@ -12,12 +12,10 @@ import javax.persistence.ManyToOne;
 @DiscriminatorValue("Phone")
 @Entity
 public class Phone implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private int number;
     private String description;
     //Mange Phone kender en InfoEntity.
@@ -28,9 +26,8 @@ public class Phone implements Serializable {
         this.number = number;
         this.description = description;
     }
-    
+
     public Phone() {
-        
     }
 
     public InfoEntity getInfoEntity() {
@@ -39,16 +36,6 @@ public class Phone implements Serializable {
 
     public void setInfoEntity(InfoEntity infoEntity) {
         this.infoEntity = infoEntity;
-    }
-    
-    
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
     
     public int getNumber() {
@@ -67,5 +54,9 @@ public class Phone implements Serializable {
         this.description = description;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Phone{" + "number=" + number + ", description=" + description + ", infoEntity=" + infoEntity + '}';
+    }
+
 }

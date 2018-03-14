@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.io.Serializable;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @DiscriminatorValue("Company")
 @Entity
@@ -30,7 +22,13 @@ public class Company extends InfoEntity implements Serializable {
         this.numEmployees = numEmployees;
         this.marketValue = marketValue;
     }
-    
+
+    public Company() {
+    }
+
+    public Company(Address address, String email) {
+        super(address, email);
+    }
 
     public String getName() {
         return name;
@@ -71,24 +69,10 @@ public class Company extends InfoEntity implements Serializable {
     public void setMarketValue(int marketValue) {
         this.marketValue = marketValue;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Company{" + "name=" + name + ", description=" + description + ", cvr=" + cvr + ", numEmployees=" + numEmployees + ", marketValue=" + marketValue + '}';
+    }
+
 }
-
-/*
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-*/
