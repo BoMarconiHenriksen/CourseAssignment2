@@ -11,7 +11,6 @@ import entities.JSONMessages.PersonMessage;
 import entity.Person;
 import facade.PersonFacade;
 import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -24,6 +23,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+
 
 /**
  * REST Web Service
@@ -39,12 +39,13 @@ public class PersonsResource {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
     EntityManager em = emf.createEntityManager();
 
-    /**
-     * Creates a new instance of PersonsResource
-     */
     public PersonsResource() {
     }
 
+    /**
+     * Creates a new instance of PersonsResource
+     */
+ 
     /**
      * Retrieves representation of an instance of persistence.PersonsResource
      *
