@@ -35,10 +35,18 @@ public class Hobby implements Serializable {
         this.description = description;
         this.persons = persons;
     }
+    
 
     public Hobby() {
 
     }
+
+    public Hobby(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+  
 
     public List<Person> getPersons() {
         return persons;

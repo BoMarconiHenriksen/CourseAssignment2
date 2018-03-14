@@ -15,7 +15,7 @@ import javax.persistence.Persistence;
 public class SchemaBuilder {
 
     public static void main(String[] args) {
-//        
+        
         HashMap puproperties = new HashMap();
         puproperties.put("javax.persistence.sql-load-script-source", "scripts/cityinfoscript.sql");
         
