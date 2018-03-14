@@ -67,7 +67,7 @@ public class TestDataGenerator {
 
     public void createTestPersons(EntityManager em) {
         InfoEntity ie;
-
+em.getTransaction().begin();
         for (int i = 0; i < 49; i++) {
             ie = new Person(df.getFirstName(), df.getLastName(), getAddresses(em).get(i), df.getEmailAddress());
             em.persist(ie);
@@ -106,17 +106,17 @@ public class TestDataGenerator {
     }
 
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
-
-        EntityManager em = emf.createEntityManager();
-        TestDataGenerator tdg = new TestDataGenerator();
-
-        em.getTransaction().begin();
-        System.out.println(tdg.getCityInfo(em));
-        tdg.createTestAddresses(em);
-        em.getTransaction().begin();
-        tdg.createTestPersons(em);
-        tdg.createHobbies(em);
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
+//
+//        EntityManager em = emf.createEntityManager();
+//        TestDataGenerator tdg = new TestDataGenerator();
+//
+//        em.getTransaction().begin();
+//     
+//        tdg.createTestAddresses(em);
+//  
+//        tdg.createTestPersons(em);
+//        tdg.createHobbies(em);
 
     }
 }

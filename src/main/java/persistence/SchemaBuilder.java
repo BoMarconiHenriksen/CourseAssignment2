@@ -24,7 +24,7 @@ public class SchemaBuilder {
         Persistence.generateSchema("CourseAssignment2_war_1.0-SNAPSHOTPU", puproperties);
 
         puproperties.remove("scripts/cityinfoscript.sql");
-        //   Persistence.generateSchema("CourseAssignment2_war_1.0-SNAPSHOTPU", null);
+//           Persistence.generateSchema("CourseAssignment2_war_1.0-SNAPSHOTPU", null);
 
 }
 }
