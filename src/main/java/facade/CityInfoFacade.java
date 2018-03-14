@@ -1,6 +1,5 @@
 package facade;
 
-import entity.Address;
 import entity.CityInfo;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -13,21 +12,23 @@ public class CityInfoFacade {
    EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
      EntityManager em = emf.createEntityManager();
   
-    public CityInfo findzipcodes(long id) {
-       
-        Query q = em.createNamedQuery("Cityinfo.findAll");
-        q.setParameter("id", getzipcodes(id));
-        CityInfo cityinfo = (CityInfo) q.getSingleResult();
-        return cityinfo;
-    }
      
  
-    public List<CityInfo> getzipcodes(long id) {
+    public List<CityInfo> getallzipofDK() {
        
         Query q = em.createQuery("SELECT c FROM CityInfo c");
         List<CityInfo> cityinfo = q.getResultList();
         return cityinfo;
-        
-        
+                
+    }
+    
+    public static void main(String[] args) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        CityInfoFacade cif = new CityInfoFacade();
+        System.out.println(cif.getallzipofDK());
+        em.close();
     }
 }
