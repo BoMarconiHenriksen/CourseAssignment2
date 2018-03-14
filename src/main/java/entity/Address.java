@@ -34,6 +34,7 @@ public class Address implements Serializable {
         this.cityinfo = cityinfo;
     }
     
+    
     public Address() {
 
     }

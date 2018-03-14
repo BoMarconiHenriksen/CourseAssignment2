@@ -10,6 +10,7 @@
     <class>entity.Company</class>
     <class>entity.Hobby</class>
     <class>entity.Person</class>
+
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ca2_databuilders"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

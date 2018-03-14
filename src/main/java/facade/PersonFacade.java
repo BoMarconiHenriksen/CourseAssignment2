@@ -14,7 +14,7 @@ public class PersonFacade {
 
     public Person findpersons(String firstname) {
 
-        Query q = em.createNamedQuery("Cityinfo.findAll");
+        Query q = em.createNamedQuery("Select p from Person p where name=:firstName");
         q.setParameter("firstname", getpersons());
         Person person = (Person) q.getSingleResult();
         return person;
@@ -22,7 +22,7 @@ public class PersonFacade {
 
     public List<Person> getpersons() {
 
-        Query q = em.createQuery("SELECT c FROM CITYINFO c");
+        Query q = em.createQuery("SELECT p FROM Person p");
         List<Person> persons = q.getResultList();
         return persons;
 
@@ -33,15 +33,7 @@ public class PersonFacade {
 
     }
 
-    List<Person> getPersons() {
-        return null;
 
-    }
-
-    List<Person> getPersons(int zipCode) {
-        return null;
-
-    }
 
     public Person findpersonsbyCity(String firstname) {
 
@@ -57,6 +49,10 @@ public class PersonFacade {
         List<Person> persons = q.getResultList();
         return persons;
 
+    }
+    public static void main(String[] args) {
+        PersonFacade pf= new PersonFacade();
+//        System.out.println(pf.);
     }
 
 }

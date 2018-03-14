@@ -15,8 +15,10 @@ public class AddressFacade {
 
     public Address findAddress(long id) {
 
+
         Query q = em.createQuery("select a from Address where a.id=:id");
         q.setParameter("id", getAddresses().get((int) id));
+
         Address addr = (Address) q.getSingleResult();
         return addr;
     }
@@ -28,7 +30,7 @@ public class AddressFacade {
         return addr;
 
     }
-    
+
     public Person findAddressbypersonName(String firstName) {
 
         Query q = em.createQuery("select a from Address where a.firstName=:" + firstName);
@@ -60,5 +62,6 @@ public class AddressFacade {
         System.out.println(af.findAddress(1L));
         em.close();
     }
+
 
 }

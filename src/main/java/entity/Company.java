@@ -29,6 +29,8 @@ public class Company extends InfoEntity implements Serializable {
     public Company(Address address, String email) {
         super(address, email);
     }
+    
+    
 
     public String getName() {
         return name;
