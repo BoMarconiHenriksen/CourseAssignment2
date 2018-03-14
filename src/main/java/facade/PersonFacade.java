@@ -12,14 +12,15 @@ public class PersonFacade {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
     EntityManager em = emf.createEntityManager();
 
-    public Person findpersons(String firstname) {
+    public List <Person> findPersonByName(String firstname)throws ClassCastException {
 
-        Query q = em.createNamedQuery("Select p from Person p where name=:firstName");
-        q.setParameter("firstname", getpersons());
-        Person person = (Person) q.getSingleResult();
-        return person;
+        Query q = em.createQuery("Select p from Person p where p.firstName=:firstname");
+        q.setParameter("firstname", firstname);
+        List< Person>persons = (List< Person>) q.getResultList();
+        return persons;
     }
 
+ 
     public List<Person> getpersons() {
 
         Query q = em.createQuery("SELECT p FROM Person p");
@@ -35,24 +36,22 @@ public class PersonFacade {
 
 
 
-    public Person findpersonsbyCity(String firstname) {
+    
 
-        Query q = em.createNamedQuery("Cityinfo.findByCity");
-        q.setParameter("firstname", getpersonsbyCity());
-        Person person = (Person) q.getSingleResult();
-        return person;
-    }
+//    public List<Person> getpersonsbyCity(String city) {
+//
+//        Query q = em.createQuery("SELECT p FROM Person p, Address a, CityInfo c,  join p.address=a.cityinfo WHERE a.cityinfo=:city");
+//        List<Person> persons = q.getResultList();
+//        return persons;
+//
+//    }
+//    em.createQuery("SELECT MAX(p.price) FROM PurchaseOrder 
+//                   o JOIN o.orderLineItems l JOIN l.product p JOIN p.supplier s WHERE s.sup_name = 'Tortuga Trading'")
 
-    public List<Person> getpersonsbyCity() {
-
-        Query q = em.createQuery("SELECT c FROM Cityinfo c WHERE c.city = :city");
-        List<Person> persons = q.getResultList();
-        return persons;
-
-    }
+    
     public static void main(String[] args) {
         PersonFacade pf= new PersonFacade();
-//        System.out.println(pf.);
+//        System.out.println(pf.getpersonsbyCity("København K"));s
     }
 
 }
