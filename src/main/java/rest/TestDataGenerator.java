@@ -1,10 +1,12 @@
-package persistence;
+package rest;
 
 import entity.Address;
 import entity.CityInfo;
+import entity.Company;
 import entity.Hobby;
 import entity.InfoEntity;
 import entity.Person;
+import entity.Phone;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -17,9 +19,10 @@ public class TestDataGenerator {
 
     DataFactory df = new DataFactory();
     Address a = new Address();
-  
+
     // denne metoder henter cityinfo objekter fra databasen som blev kørt med startscriptet
     public List<CityInfo> getCityInfo(EntityManager em) throws ClassCastException {
+
         List<CityInfo> cities2 = new ArrayList<>();
 
         List<CityInfo> cities = new ArrayList<>();
@@ -36,22 +39,21 @@ public class TestDataGenerator {
 
     }
 
-    public void createTestAddresses(EntityManager em) {
+    public void createTestAddresses(EntityManager em) throws ClassCastException {
 
         Address b;
 
-        for (int i = 0; i < 49; i++) {
+        for (int i = 0; i < 100; i++) {
             b = new Address(df.getStreetName(), getCityInfo(em).get((int) (Math.random() * 49)));
             em.persist(b);
 
         }
-        em.getTransaction().commit();
+
     }
 
     public List<Address> getAddresses(EntityManager em) throws ClassCastException {
         List<Address> adds = new ArrayList<>();
 
-        List<Address> addressers = new ArrayList<>();
         Query q = em.createQuery("select a from Address a");
 
         Address ci;
@@ -67,56 +69,75 @@ public class TestDataGenerator {
 
     public void createTestPersons(EntityManager em) {
         InfoEntity ie;
-em.getTransaction().begin();
+
         for (int i = 0; i < 49; i++) {
+//            createTestAddresses(em);
             ie = new Person(df.getFirstName(), df.getLastName(), getAddresses(em).get(i), df.getEmailAddress());
             em.persist(ie);
 
         }
-        em.getTransaction().commit();
 
     }
 //      super(address, email);
-//        this.name = name;
-//        this.description = description;
-//        this.cvr = cvr;
-//        this.numEmployees = numEmployees;
-//        this.marketValue = marketValue;
-     public void createTestCompanies(EntityManager em) {
-        InfoEntity ie = null;
+//String name, String description, int cvr, int numEmployees, int marketValue, Address address, String email
+
+    public void createTestCompanies(EntityManager em) {
+        InfoEntity ie;
 
         for (int i = 0; i < 49; i++) {
-//            ie = new Company(df.getAddress(),df.getEmailAddress(),df.getBusinessName(), df.getRandomWord(),(int) df.getNumberBetween(300000, 1000000), (int) (Math.random() * 200), (int) (Math.random() * 2300000));
+            ie = new Company(df.getBusinessName(), df.getRandomWord(), (int) df.getNumberBetween(300000, 1000000), (int) (Math.random() * 200), (int) (Math.random() * 2300000), getAddresses(em).get(i + 49), df.getEmailAddress());
             em.persist(ie);
 
         }
-        em.getTransaction().commit();
 
     }
-    
+
     // her skal vi have fundet nogle rigtige ord
-    public void createHobbies(EntityManager em){
+    public void createHobbies(EntityManager em) {
+
         Hobby h;
-        for (int i = 0; i<30; i++){
-            h= new Hobby(df.getRandomWord(), df.getRandomText(20));
+        for (int i = 0; i < 30; i++) {
+            h = new Hobby(df.getRandomWord(), df.getRandomWord() + " " + df.getRandomWord());
             em.persist(h);
-            
+
         }
-          em.getTransaction().commit();
+
+    }
+
+    public List<InfoEntity> getInfoEntities(EntityManager em) {
+        List<InfoEntity> ies;
+        Query q = em.createQuery("select e from InfoEntity e");
+        ies = q.getResultList();
+        return ies;
+    }
+
+    public void createPhones(EntityManager em) {
+
+        Phone phone;
+        for (int i = 0; i < 100; i++) {
+            phone = new Phone(df.getNumberBetween(10000000, 99999999), df.getRandomWord(), getInfoEntities(em).get((int) (Math.random() *49)));
+            em.persist(phone);
+
+        }
+
     }
 
     public static void main(String[] args) {
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
-//
-//        EntityManager em = emf.createEntityManager();
-//        TestDataGenerator tdg = new TestDataGenerator();
-//
-//        em.getTransaction().begin();
-//     
-//        tdg.createTestAddresses(em);
-//  
-//        tdg.createTestPersons(em);
-//        tdg.createHobbies(em);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
 
+        EntityManager em = emf.createEntityManager();
+        TestDataGenerator tdg = new TestDataGenerator();
+
+        em.getTransaction().begin();
+
+        tdg.createTestAddresses(em);
+
+        tdg.createTestPersons(em);
+        tdg.createHobbies(em);
+        tdg.createTestCompanies(em);
+        tdg.createPhones(em);
+//System.out.println(tdg.getCityInfo(em));
+        em.getTransaction().commit();
+        em.close();
     }
 }
