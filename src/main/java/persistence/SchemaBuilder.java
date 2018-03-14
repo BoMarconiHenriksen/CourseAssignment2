@@ -18,11 +18,11 @@ public class SchemaBuilder {
 //        
         HashMap puproperties = new HashMap();
         puproperties.put("javax.persistence.sql-load-script-source", "scripts/cityinfoscript.sql");
-        
-// puproperties.put("javax.persistence.sql-load-script-source" ,"oneTimeSetupCa2.sql");
+
+     //   puproperties.put("javax.persistence.sql-load-script-source", "oneTimeSetupCa2.sql");
         Persistence.generateSchema("CourseAssignment2_war_1.0-SNAPSHOTPU", puproperties);
-        
-        puproperties.remove( "scripts/cityinfoscript.sql");
-//Persistence.generateSchema("CourseAssignment2_war_1.0-SNAPSHOTPU", null);
+
+        puproperties.remove("scripts/cityinfoscript.sql");
+        //   Persistence.generateSchema("CourseAssignment2_war_1.0-SNAPSHOTPU", null);
     }
 }

@@ -16,15 +16,15 @@ public class CityInfoFacade {
     public CityInfo findzipcodes(long id) {
        
         Query q = em.createNamedQuery("Cityinfo.findAll");
-        q.setParameter("id", getzipcodes());
+        q.setParameter("id", getzipcodes(id));
         CityInfo cityinfo = (CityInfo) q.getSingleResult();
         return cityinfo;
     }
      
  
-    public List<CityInfo> getzipcodes() {
+    public List<CityInfo> getzipcodes(long id) {
        
-        Query q = em.createQuery("SELECT c FROM CITYINFO c");
+        Query q = em.createQuery("SELECT c FROM CityInfo c");
         List<CityInfo> cityinfo = q.getResultList();
         return cityinfo;
         
