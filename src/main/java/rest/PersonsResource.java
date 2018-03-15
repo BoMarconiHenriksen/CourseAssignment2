@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistence;
+package rest;
 
 import com.google.gson.Gson;
-import entities.JSONMessages.JSONMessage;
-import entities.JSONMessages.PersonMessage;
+import entity.JSONMessages.JSONMessage;
+import entity.JSONMessages.PersonMessage;
 import entity.Person;
 import facade.PersonFacade;
 import java.util.ArrayList;

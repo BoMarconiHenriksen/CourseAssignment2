@@ -1,5 +1,5 @@
 
-package persistence;
+package rest;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -24,7 +24,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(ExceptionHandling.PersonNotFoundExceptionMapper.class);
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
-        resources.add(persistence.PersonsResource.class);
+        resources.add(rest.PersonsResource.class);
     }
     
 }

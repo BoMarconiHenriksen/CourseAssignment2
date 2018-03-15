@@ -15,7 +15,6 @@ public class Phone implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int number;
     private String description;
     //Mange Phone kender en InfoEntity.
@@ -25,6 +24,12 @@ public class Phone implements Serializable {
     public Phone(int number, String description) {
         this.number = number;
         this.description = description;
+    }
+
+    public Phone(int number, String description, InfoEntity infoEntity) {
+        this.number = number;
+        this.description = description;
+        this.infoEntity = infoEntity;
     }
 
     public Phone() {

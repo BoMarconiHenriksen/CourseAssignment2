@@ -22,6 +22,7 @@ public class Company extends InfoEntity implements Serializable {
         this.numEmployees = numEmployees;
         this.marketValue = marketValue;
     }
+    
 
     public Company() {
     }
