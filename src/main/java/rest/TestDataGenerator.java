@@ -7,6 +7,8 @@ import entity.Hobby;
 import entity.InfoEntity;
 import entity.Person;
 import entity.Phone;
+import facade.PersonFacade;
+import static facade.PersonFacade.getPerson;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -96,12 +98,46 @@ public class TestDataGenerator {
     public void createHobbies(EntityManager em) {
 
         Hobby h;
+        Person p = null;
         for (int i = 0; i < 30; i++) {
+           
+          
+               
             h = new Hobby(df.getRandomWord(), df.getRandomWord() + " " + df.getRandomWord());
+             for (int j = 0; j<Math.random()*6;j++){
+           p=PersonFacade.getpersons(em).get(i);
+             getHobbies(em).get(i).givePersons(p);
+           }
             em.persist(h);
 
         }
 
+    }
+    
+    
+    public List<Hobby> getHobbies(EntityManager em){
+      Hobby h;
+      List<Hobby>hos;
+      Query q = em.createQuery("select h from Hobby h");
+      hos=q.getResultList();
+      
+        return hos;
+        
+        
+    }
+    public void addHobbies(EntityManager em){
+        
+        Person p ;
+        List<Person> pWithHobbies = new ArrayList<>();
+       for (int i = 0; i<30;i++){
+        
+        
+      
+        
+           em.persist(pWithHobbies);
+//           em.persist(getHobbies(em));
+       }
+        
     }
 
     public List<InfoEntity> getInfoEntities(EntityManager em) {
@@ -129,14 +165,16 @@ public class TestDataGenerator {
         TestDataGenerator tdg = new TestDataGenerator();
 
         em.getTransaction().begin();
-
-        tdg.createTestAddresses(em);
-
-        tdg.createTestPersons(em);
-        tdg.createHobbies(em);
-        tdg.createTestCompanies(em);
-        tdg.createPhones(em);
-//System.out.println(tdg.getCityInfo(em));
+tdg.createHobbies(em);
+//        tdg.createTestAddresses(em);
+//
+//        tdg.createTestPersons(em);
+//        tdg.addHobbies(em);
+//        tdg.createTestCompanies(em);
+//        tdg.createPhones(em);
+////System.out.println(tdg.getCityInfo(em));
+//tdg.addHobbies(em);
+//System.out.println(tdg.getHobbies(em));
         em.getTransaction().commit();
         em.close();
     }

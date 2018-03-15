@@ -30,7 +30,7 @@ public class PersonNotFoundExceptionMapper implements ExceptionMapper<PersonNotF
         boolean isDebug = context.getInitParameter("debug").endsWith("true");
         ErrorMessage err = new ErrorMessage(exception, 404, isDebug);
         err.setMessage("There is no person with this Id");
-
+err.getDescription();
         return Response.status(404)
                 .entity(gson.toJson(err))
                 .type(MediaType.APPLICATION_JSON)
