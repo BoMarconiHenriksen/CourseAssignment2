@@ -69,7 +69,58 @@
             <div class="container">
                 <h2 class="text-center text-uppercase text-secondary mb-0">Portfolio</h2>
                 <hr class="star-dark mb-5">
-                <div class="row">
+                
+                  <div class="search-container" style="float:right;">
+    <form action="/action_page.php">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+         
+                <div class="form-inline">
+
+            <div class="form-group">
+                <label for="personFirstname"> Person Firstname: </label>
+                <input type="text" name="pName"><br>
+            </div>
+            <div class="form-group">
+                <label for="personPhone"> Person Phone Number: </label>
+                <input type="number" name="pPhone"><br>
+            </div>
+            <div class="form-group">
+               <label> Person Hobby: </label><input class="form-control" type="text" id="pAddress" > 
+            </div>
+                    <div class="form-group">
+                <label for="personHobby"> Person Phone Number: </label>
+                <input type="text" name="pHobby"><br>
+            </div>
+                             <div class="form-group">
+                <label for="zipCodes"> Zip Codes: </label>
+                <input type="number" name="zip"><br>
+            </div>
+            <button class="btn btn-default" id="btnsend"> Submit </button>
+            <button class="btn btn-default" id="btnsql"> Get SQL... </button>
+            <br/>
+            <div class="row">
+                <div class="col-md-6">
+
+                    <table id="tbl" class="table">
+                        <thead>
+                        <th>First Name</th><th>Surname</th><th>Gender</th>
+                        </thead>
+                        <!-- >TODO: Dynamically create the rows with data fetched from the API, and insert into the table here -->
+                        <tbody id="tblbody"></tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <p>Copy SQL into clipboard from below:</p>
+                    <!-- TODO: Create the necessary SQL-script to insert all data fetched from the API, into a table with matching colums -->
+                    <textarea readonly id="sql" style="width: 100%" rows="6"></textarea>
+
+                </div>
+</div>
+                </div>
+        <!--        <div class="row">
                     <div class="col-md-6 col-lg-4">
                         <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-1">
                             <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
@@ -130,7 +181,8 @@
                             <img class="img-fluid" src="img/portfolio/submarine.png" alt="">
                         </a>
                     </div>
-                </div>
+                </div> 
+        -->
             </div>
         </section>
 
