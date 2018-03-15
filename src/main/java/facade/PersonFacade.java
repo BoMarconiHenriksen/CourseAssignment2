@@ -15,6 +15,16 @@ public class PersonFacade {
     EntityManager em = emf.createEntityManager();
   public static HashMap<Integer, Hobby> hobbies = new HashMap<>();
   public static HashMap<Integer, Person> persons= new HashMap<>();
+    
+  
+    
+    public static void createPerson(EntityManager em, Person p) {
+        em.getTransaction().begin();
+        em.persist(p);
+        em.getTransaction().commit();
+       
+    }
+  
     public List <Person> findPersonByName(String firstname)throws ClassCastException {
 
         Query q = em.createQuery("Select p from Person p where p.firstName=:firstname");

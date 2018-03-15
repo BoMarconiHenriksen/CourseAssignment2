@@ -7,6 +7,7 @@ package rest;
 
 import com.google.gson.Gson;
 import entity.JSONMessages.JSONMessage;
+import entity.JSONMessages.MessageFacade;
 import entity.JSONMessages.PersonMessage;
 import entity.Person;
 import facade.PersonFacade;
@@ -19,6 +20,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -42,15 +44,17 @@ public class PersonsResource {
     public PersonsResource() {
     }
 
-    /**
-     * Creates a new instance of PersonsResource
-     */
- 
-    /**
-     * Retrieves representation of an instance of persistence.PersonsResource
-     *
-     * @return an instance of java.lang.String
-     */
+    
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addPerson(String json) {
+        Person p = MessageFacade.fromJson(json, PersonMessage.class);
+        PersonFacade.createPerson(em, p);
+        
+        
+    }
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
@@ -82,13 +86,4 @@ public class PersonsResource {
 
     }
 
-    /**
-     * PUT method for updating or creating an instance of PersonsResource
-     *
-     * @param content representation for the resource
-     */
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
-    }
 }
