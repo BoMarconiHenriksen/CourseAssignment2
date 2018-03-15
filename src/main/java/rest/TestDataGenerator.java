@@ -8,7 +8,6 @@ import entity.InfoEntity;
 import entity.Person;
 import entity.Phone;
 import facade.PersonFacade;
-import static facade.PersonFacade.getPerson;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -98,46 +97,40 @@ public class TestDataGenerator {
     public void createHobbies(EntityManager em) {
 
         Hobby h;
-        Person p = null;
+        Person p ;
         for (int i = 0; i < 30; i++) {
-           
-          
-               
+
+            for (int j = 0; j < Math.random() * 6; j++) {
+                p = PersonFacade.getpersons(em).get(i);
+                getHobbies(em).get(i).givePersons(p);
+            }
             h = new Hobby(df.getRandomWord(), df.getRandomWord() + " " + df.getRandomWord());
-             for (int j = 0; j<Math.random()*6;j++){
-           p=PersonFacade.getpersons(em).get(i);
-             getHobbies(em).get(i).givePersons(p);
-           }
             em.persist(h);
 
         }
 
     }
-    
-    
-    public List<Hobby> getHobbies(EntityManager em){
-      Hobby h;
-      List<Hobby>hos;
-      Query q = em.createQuery("select h from Hobby h");
-      hos=q.getResultList();
-      
+
+    public List<Hobby> getHobbies(EntityManager em) {
+        Hobby h;
+        List<Hobby> hos;
+        Query q = em.createQuery("select h from Hobby h");
+        hos = q.getResultList();
+
         return hos;
-        
-        
+
     }
-    public void addHobbies(EntityManager em){
-        
-        Person p ;
+
+    public void addHobbies(EntityManager em) {
+
+        Person p;
         List<Person> pWithHobbies = new ArrayList<>();
-       for (int i = 0; i<30;i++){
-        
-        
-      
-        
-           em.persist(pWithHobbies);
+        for (int i = 0; i < 30; i++) {
+
+            em.persist(pWithHobbies);
 //           em.persist(getHobbies(em));
-       }
-        
+        }
+
     }
 
     public List<InfoEntity> getInfoEntities(EntityManager em) {
@@ -151,7 +144,7 @@ public class TestDataGenerator {
 
         Phone phone;
         for (int i = 0; i < 100; i++) {
-            phone = new Phone(df.getNumberBetween(10000000, 99999999), df.getRandomWord(), getInfoEntities(em).get((int) (Math.random() *49)));
+            phone = new Phone(df.getNumberBetween(10000000, 99999999), df.getRandomWord(), getInfoEntities(em).get((int) (Math.random() * 49)));
             em.persist(phone);
 
         }
@@ -165,13 +158,14 @@ public class TestDataGenerator {
         TestDataGenerator tdg = new TestDataGenerator();
 
         em.getTransaction().begin();
-tdg.createHobbies(em);
-//        tdg.createTestAddresses(em);
-//
-//        tdg.createTestPersons(em);
+
+        tdg.createTestAddresses(em);
+
+        tdg.createTestPersons(em);
 //        tdg.addHobbies(em);
-//        tdg.createTestCompanies(em);
-//        tdg.createPhones(em);
+        tdg.createTestCompanies(em);
+        tdg.createPhones(em);
+//        tdg.createHobbies(em);
 ////System.out.println(tdg.getCityInfo(em));
 //tdg.addHobbies(em);
 //System.out.println(tdg.getHobbies(em));

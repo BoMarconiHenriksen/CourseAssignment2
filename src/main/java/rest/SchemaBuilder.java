@@ -28,12 +28,15 @@ public class SchemaBuilder {
 
 //        Persistence.generateSchema("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU", null);
         HashMap puproperties2 = new HashMap();
-        puproperties2.put("javax.persistence.sql-load-script-source", "scripts/cityinfoscript.sql");
-
-        //   puproperties.put("javax.persistence.sql-load-script-source", "oneTimeSetupCa2.sql");
+        
+       
+puproperties2.put("javax.persistence.sql-load-script-source", "scripts/dbdropAndCreatre.sql"); 
+puproperties2.put("javax.persistence.sql-load-script-source", "scripts/cityinfoscript.sql");
+//           puproperties.put("javax.persistence.sql-load-script-source", "oneTimeSetupCa2.sql");
         Persistence.generateSchema("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU", puproperties2);
 
         puproperties2.remove("scripts/cityinfoscript.sql");
-     
+         puproperties2.remove("scripts/dbdropAndCreatre.sql");
+//     
     }
 }

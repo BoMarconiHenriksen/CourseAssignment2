@@ -15,7 +15,24 @@ public class PersonFacade {
     EntityManager em = emf.createEntityManager();
   public static HashMap<Integer, Hobby> hobbies = new HashMap<>();
   public static HashMap<Integer, Person> persons= new HashMap<>();
+    
   
+    
+    
+    public static void deletePersonById(EntityManager em, int personId) {
+        Person p = getPerson(em, personId);
+        em.getTransaction().begin();
+
+        em.remove(p);//createQuery("DELETE from person where ID="+personId);
+        em.getTransaction().commit();
+    }
+  
+    public static void createPerson(EntityManager em, Person p) {
+        em.getTransaction().begin();
+        em.persist(p);
+        em.getTransaction().commit();
+       
+    }
   
     public List <Person> findPersonByName(String firstname)throws ClassCastException {
 
