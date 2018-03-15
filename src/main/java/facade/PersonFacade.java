@@ -2,6 +2,8 @@ package facade;
 
 import entity.Hobby;
 import entity.Person;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -10,6 +12,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class PersonFacade {
+
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
     EntityManager em = emf.createEntityManager();
@@ -26,8 +29,16 @@ public class PersonFacade {
         return (List<Hobby>) hobbies.get(id);
         
     }
+     
+    
+    public static void deletePersonById(EntityManager em, int personId) {
+        Person p = getPerson(em, personId);
+        em.getTransaction().begin();
 
- 
+        em.remove(p);//createQuery("DELETE from person where ID="+personId);
+        em.getTransaction().commit();
+    }
+    
     public static HashMap<Integer,Person> getpersons(EntityManager em) {
 
         Query q = em.createQuery("SELECT p FROM Person p");
@@ -39,8 +50,29 @@ public class PersonFacade {
         return persons;
 
     }
+    
+    public static void createPerson(EntityManager em, Person p) {
+        em.getTransaction().begin();
+        em.persist(p);
+        em.getTransaction().commit();
+       
+    }
+    
+    public static Long largeVacantId(EntityManager em) {
+        ArrayList<Long> allIds = new ArrayList();
+        Query q = em.createQuery("SELECT p FROM Person p");
+        List<Person> persons = q.getResultList();
+        for (Person eachPerson: persons) {
+            allIds.add(eachPerson.getId());
+        }
+        Collections.sort(allIds);
+        Long lastId = allIds.get(-1);
+        return ++lastId;        
+    }
 
-  public static  Person getPerson(EntityManager em,int id) {
+    
+    
+  public static  Person getPerson(EntityManager em,long id) {
         return getpersons(em).get(id);
 
     }

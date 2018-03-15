@@ -7,6 +7,7 @@ package persistence;
 
 import com.google.gson.Gson;
 import entities.JSONMessages.JSONMessage;
+import entities.JSONMessages.MessageFacade;
 import entities.JSONMessages.PersonMessage;
 import entity.Person;
 import facade.PersonFacade;
@@ -17,8 +18,10 @@ import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -66,6 +69,36 @@ public class PersonsResource {
 
     }
 
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addPerson(String json) {
+        Person p = MessageFacade.fromJson(json, PersonMessage.class);
+        PersonFacade.createPerson(em, p);
+        
+        
+    }
+    
+    @Path("/{id}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void putPersonByID(@PathParam("id") int personId, String json) {
+        Person pOrigin = PersonFacade.getPerson(em, personId);
+        Person pChange = MessageFacade.fromJson(json, PersonMessage.class);
+        pChange.setId(pOrigin.getId());
+        // mangler at slette den originale og saette den nye ind
+    }
+    
+    @Path("{id}")
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deletePersonById(@PathParam("id") int personId) {
+        PersonFacade.deletePersonById(em, personId);
+    }
+    
+    
+    
+    
+    
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -82,13 +115,4 @@ public class PersonsResource {
 
     }
 
-    /**
-     * PUT method for updating or creating an instance of PersonsResource
-     *
-     * @param content representation for the resource
-     */
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
-    }
 }
