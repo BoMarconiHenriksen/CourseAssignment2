@@ -18,6 +18,15 @@ public class PersonFacade {
     
   
     
+    
+    public static void deletePersonById(EntityManager em, int personId) {
+        Person p = getPerson(em, personId);
+        em.getTransaction().begin();
+
+        em.remove(p);//createQuery("DELETE from person where ID="+personId);
+        em.getTransaction().commit();
+    }
+  
     public static void createPerson(EntityManager em, Person p) {
         em.getTransaction().begin();
         em.persist(p);

@@ -18,6 +18,7 @@ import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -45,6 +46,12 @@ public class PersonsResource {
     }
 
     
+    @Path("{id}")
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deletePersonById(@PathParam("id") int personId) {
+        PersonFacade.deletePersonById(em, personId);
+    }
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
