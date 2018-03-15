@@ -98,17 +98,41 @@ public class PersonsResource {
     public String getPersonById(@PathParam("id") Integer id) {
 
         ArrayList<JSONMessage> messages = new ArrayList<>();
+        
         Person p=PersonFacade.getPerson(em, id);
           if (p==null){
-            throw new PersonNotFoundException("");
-            
+            throw new PersonNotFoundException("No person with that id");
+         
         }
+          else{
 
             messages.add(new PersonMessage(p));
-     
+          }
 
         return gson.toJson(messages);
 
     }
+
+
+//   @Path("/{firstName}")
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public String getPersonByFirstName(@PathParam("firstName") String firstname) {
+//
+//        ArrayList<JSONMessage> messages = new ArrayList<>();
+//        
+//        Person p=TestDataGen;
+//          if (p==null){
+//            throw new PersonNotFoundException("No person with that id");
+//         
+//        }
+//          else{
+//
+//            messages.add(new PersonMessage(p));
+//          }
+//
+//        return gson.toJson(messages);
+//
+//    }
 
 }

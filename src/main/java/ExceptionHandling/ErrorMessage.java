@@ -20,13 +20,18 @@ public class ErrorMessage {
     public ErrorMessage(Throwable ex, int code, boolean debug) {
         this.code = code;
         this.message = ex.getMessage();
-        this.description = ex.getCause().getMessage();
+        this.description = "Something Awfull Happened";
         if (debug) {
             StringWriter sw = new StringWriter();
             ex.printStackTrace(new PrintWriter(sw));
             this.stackTrace = sw.toString();
         }
+        
      
+    }
+
+    public ErrorMessage(String description) {
+        this.description = description;
     }
 
     public String getDescription() {
@@ -60,5 +65,10 @@ public class ErrorMessage {
 
     public void setStackTrace(String stackTrace) {
         this.stackTrace = stackTrace;
+    }
+
+    @Override
+    public String toString() {
+        return "ErrorMessage{" + "code=" + code + ", message=" + message + ", description=" + description + ", stackTrace=" + stackTrace + '}';
     }
 }

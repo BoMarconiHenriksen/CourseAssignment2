@@ -46,8 +46,8 @@ public class TestDataGenerator {
 
         for (int i = 0; i < 100; i++) {
             b = new Address(df.getStreetName(), getCityInfo(em).get((int) (Math.random() * 49)));
-            em.persist(b);
-
+            
+em.persist(b);
         }
 
     }
@@ -166,7 +166,7 @@ public class TestDataGenerator {
         tdg.createTestCompanies(em);
         tdg.createPhones(em);
 //        tdg.createHobbies(em);
-////System.out.println(tdg.getCityInfo(em));
+//System.out.println(tdg.getCityInfo(em));
 //tdg.addHobbies(em);
 //System.out.println(tdg.getHobbies(em));
         em.getTransaction().commit();

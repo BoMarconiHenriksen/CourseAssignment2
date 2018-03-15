@@ -14,6 +14,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
+
+
 /**
  *
  * @author Ejer
@@ -26,17 +28,16 @@ public class PersonNotFoundExceptionMapper implements ExceptionMapper<PersonNotF
     ServletContext context;
 
     @Override
-    public Response toResponse(PersonNotFoundException exception) {
-        boolean isDebug = context.getInitParameter("debug").endsWith("true");
-        ErrorMessage err = new ErrorMessage(exception, 404, isDebug);
-        err.setMessage("There is no person with this Id");
-err.getDescription();
+    public Response toResponse(PersonNotFoundException ex) {
+        boolean isDebug = context.getInitParameter("debug").endsWith("false");
+        ErrorMessage err = new ErrorMessage(ex, 404, isDebug);
+     
+        err.setDescription("Somthing awfull happened");
+        
         return Response.status(404)
                 .entity(gson.toJson(err))
                 .type(MediaType.APPLICATION_JSON)
                 .build();
-        
+
     }
 }
-
- 
