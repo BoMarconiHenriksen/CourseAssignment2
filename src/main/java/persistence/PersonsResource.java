@@ -107,6 +107,7 @@ public class PersonsResource {
         ArrayList<JSONMessage> messages = new ArrayList<>();
         Person p=PersonFacade.getPerson(em, id);
         
+        
 
             messages.add(new PersonMessage(p));
      
