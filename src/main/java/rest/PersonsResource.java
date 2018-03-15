@@ -47,6 +47,18 @@ public class PersonsResource {
 
     
     @Path("{id}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void putPersonById(@PathParam("id") int personId, String content) {
+        Person pStart = PersonFacade.getPerson(em, personId);
+        Person pEnd = MessageFacade.fromJson(content, PersonMessage.class);
+        pEnd.setId(pStart.getId());
+        deletePersonById(personId);     
+        PersonFacade.createPerson(em, pEnd);
+        
+    }
+    
+    @Path("{id}")
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     public void deletePersonById(@PathParam("id") int personId) {
@@ -80,7 +92,7 @@ public class PersonsResource {
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson(@PathParam("id") Integer id) {
+    public String getPersonById(@PathParam("id") Integer id) {
 
         ArrayList<JSONMessage> messages = new ArrayList<>();
         Person p=PersonFacade.getPerson(em, id);
