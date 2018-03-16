@@ -119,6 +119,7 @@ public class PersonsResource {
         List<Person> p = pf.findPersonByName(firstName);
         if (p.isEmpty()) {
             throw new PersonNotFoundException("No persons with that firstname");
+            
 
         } else {
             for (int i = 0; i < p.size(); i++) {

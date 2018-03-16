@@ -20,7 +20,7 @@ public class ErrorMessage {
     public ErrorMessage(Throwable ex, int code, boolean debug) {
         this.code = code;
         this.message = ex.getMessage();
-        this.description = "Something Awfull Happened";
+        this.description = "";
         if (debug) {
             StringWriter sw = new StringWriter();
             ex.printStackTrace(new PrintWriter(sw));

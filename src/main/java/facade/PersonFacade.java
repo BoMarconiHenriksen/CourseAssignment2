@@ -46,6 +46,15 @@ public class PersonFacade {
         return (List<Hobby>) hobbies.get(id);
         
     }
+    public List<Person> getpersonsbyCity(String city) {
+
+        Query q = em.createQuery("SELECT p FROM Person p, Address a, CityInfo c,  join p.address=a.cityinfo WHERE a.cityinfo=:city");
+        List<Person> persons = q.getResultList();
+        return persons;
+
+    }
+//    em.createQuery("SELECT MAX(p.price) FROM PurchaseOrder 
+//                   o JOIN o.orderLineItems l JOIN l.product p JOIN p.supplier s WHERE s.sup_name = 'Tortuga Trading'")
 
  
     public static HashMap<Integer,Person> getpersons(EntityManager em) {
@@ -85,6 +94,7 @@ public class PersonFacade {
     public static void main(String[] args) {
         PersonFacade pf= new PersonFacade();
         System.out.println(pf.findPersonByName("Tim"));
+        System.out.println(pf.getpersonsbyCity("København K"));
     
 //        System.out.println(pf.getpersonsbyCity("København K"));s
     }
