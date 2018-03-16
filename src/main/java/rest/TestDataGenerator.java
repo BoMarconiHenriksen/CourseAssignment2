@@ -51,6 +51,17 @@ public class TestDataGenerator {
 
     }
 
+    
+    void dropOurDatabase(EntityManager em) {
+        em.createQuery("delete from ca2_databuilders ca2_databuilders;");
+        
+    }
+    
+    void createOurDatabase(EntityManager em) {
+        em.createQuery("create SCHEMA ca2_databuilders;");
+        
+    }
+    
     public List<Address> getAddresses(EntityManager em) throws ClassCastException {
         List<Address> adds = new ArrayList<>();
 
@@ -122,7 +133,8 @@ public class TestDataGenerator {
 
     }
 
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
+    public static void fillTables() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
 
         EntityManager em = emf.createEntityManager();
@@ -140,4 +152,5 @@ public class TestDataGenerator {
         em.getTransaction().commit();
         em.close();
     }
+
 }
