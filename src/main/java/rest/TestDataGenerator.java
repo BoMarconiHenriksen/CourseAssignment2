@@ -7,7 +7,6 @@ import entity.Hobby;
 import entity.InfoEntity;
 import entity.Person;
 import entity.Phone;
-import facade.PersonFacade;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -46,8 +45,8 @@ public class TestDataGenerator {
 
         for (int i = 0; i < 100; i++) {
             b = new Address(df.getStreetName(), getCityInfo(em).get((int) (Math.random() * 49)));
-            
-em.persist(b);
+            em.persist(b);
+
         }
 
     }
@@ -97,38 +96,10 @@ em.persist(b);
     public void createHobbies(EntityManager em) {
 
         Hobby h;
-        Person p ;
         for (int i = 0; i < 30; i++) {
-
-            for (int j = 0; j < Math.random() * 6; j++) {
-                p = PersonFacade.getpersons(em).get(i);
-                getHobbies(em).get(i).givePersons(p);
-            }
             h = new Hobby(df.getRandomWord(), df.getRandomWord() + " " + df.getRandomWord());
             em.persist(h);
 
-        }
-
-    }
-
-    public List<Hobby> getHobbies(EntityManager em) {
-        Hobby h;
-        List<Hobby> hos;
-        Query q = em.createQuery("select h from Hobby h");
-        hos = q.getResultList();
-
-        return hos;
-
-    }
-
-    public void addHobbies(EntityManager em) {
-
-        Person p;
-        List<Person> pWithHobbies = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-
-            em.persist(pWithHobbies);
-//           em.persist(getHobbies(em));
         }
 
     }
@@ -144,7 +115,7 @@ em.persist(b);
 
         Phone phone;
         for (int i = 0; i < 100; i++) {
-            phone = new Phone(df.getNumberBetween(10000000, 99999999), df.getRandomWord(), getInfoEntities(em).get((int) (Math.random() * 49)));
+            phone = new Phone(df.getNumberBetween(10000000, 99999999), df.getRandomWord(), getInfoEntities(em).get((int) (Math.random() *49)));
             em.persist(phone);
 
         }
@@ -162,13 +133,10 @@ em.persist(b);
         tdg.createTestAddresses(em);
 
         tdg.createTestPersons(em);
-//        tdg.addHobbies(em);
+        tdg.createHobbies(em);
         tdg.createTestCompanies(em);
         tdg.createPhones(em);
-//        tdg.createHobbies(em);
 //System.out.println(tdg.getCityInfo(em));
-//tdg.addHobbies(em);
-//System.out.println(tdg.getHobbies(em));
         em.getTransaction().commit();
         em.close();
     }
