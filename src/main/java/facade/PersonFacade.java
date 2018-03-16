@@ -11,7 +11,7 @@ import javax.persistence.Query;
 
 public class PersonFacade {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
     EntityManager em = emf.createEntityManager();
   public static HashMap<Integer, Hobby> hobbies = new HashMap<>();
   public static HashMap<Integer, Person> persons= new HashMap<>();
@@ -26,6 +26,7 @@ public class PersonFacade {
         em.remove(p);//createQuery("DELETE from person where ID="+personId);
         em.getTransaction().commit();
     }
+    
   
     public static void createPerson(EntityManager em, Person p) {
         em.getTransaction().begin();
@@ -34,10 +35,10 @@ public class PersonFacade {
        
     }
   
-    public List <Person> findPersonByName(String firstname)throws ClassCastException {
+    public  List <Person> findPersonByName(String firstName)throws ClassCastException {
 
-        Query q = em.createQuery("Select p from Person p where p.firstName=:firstname");
-        q.setParameter("firstname", firstname);
+        Query q = em.createQuery("Select p from Person p where p.firstName=:firstName");
+        q.setParameter("firstName", firstName);
         List< Person>persons = (List< Person>) q.getResultList();
         return persons;
     }
@@ -63,6 +64,8 @@ public class PersonFacade {
         return getpersons(em).get(id);
 
     }
+  
+  
 
 
 
@@ -81,7 +84,8 @@ public class PersonFacade {
     
     public static void main(String[] args) {
         PersonFacade pf= new PersonFacade();
-//        System.out.println(pf.getpersons(e));
+        System.out.println(pf.findPersonByName("Tim"));
+    
 //        System.out.println(pf.getpersonsbyCity("København K"));s
     }
 
