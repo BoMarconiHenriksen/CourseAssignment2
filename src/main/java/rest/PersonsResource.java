@@ -6,6 +6,9 @@
 package rest;
 
 import ExceptionHandling.PersonNotFoundException;
+
+import ExceptionHandling.WebApplicationException;
+
 import com.google.gson.Gson;
 import entity.JSONMessages.JSONMessage;
 import entity.JSONMessages.MessageFacade;
@@ -28,7 +31,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
-
+import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service
@@ -47,7 +50,6 @@ public class PersonsResource {
     public PersonsResource() {
     }
 
-    
     @Path("{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -55,27 +57,26 @@ public class PersonsResource {
         Person pStart = PersonFacade.getPerson(em, personId);
         Person pEnd = MessageFacade.fromJson(content, PersonMessage.class);
         pEnd.setId(pStart.getId());
-        deletePersonById(personId);     
+        deletePersonById(personId);
         PersonFacade.createPerson(em, pEnd);
-        
+
     }
-    
+
     @Path("{id}")
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     public void deletePersonById(@PathParam("id") int personId) {
         PersonFacade.deletePersonById(em, personId);
     }
-    
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void addPerson(String json) {
         Person p = MessageFacade.fromJson(json, PersonMessage.class);
         PersonFacade.createPerson(em, p);
-        
-        
+
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getallPerson() {
@@ -97,6 +98,7 @@ public class PersonsResource {
     public String getPersonById(@PathParam("id") Integer id) {
 
         ArrayList<JSONMessage> messages = new ArrayList<>();
+
         Person p=PersonFacade.getPerson(em, id);
             if (p == null) {
             throw new PersonNotFoundException("No person with that id");
@@ -104,8 +106,7 @@ public class PersonsResource {
 
             }
             messages.add(new PersonMessage(p));
-     
-
+    }
         return gson.toJson(messages);
 
     }
