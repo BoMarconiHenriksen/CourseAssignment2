@@ -76,7 +76,7 @@ public class PersonsResource {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
+    public String getallPerson() {
 
         ArrayList<JSONMessage> messages = new ArrayList<>();
         PersonFacade.getpersons(em);
