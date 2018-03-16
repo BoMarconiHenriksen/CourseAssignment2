@@ -40,7 +40,7 @@ function fetchAllPersons() {
                 if (response.ok) {
                     return response.json();
                 }
-                throw new Error("Noget gik galt med fetch metoden!" + response.json());
+                throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
             })
             .then(data => { //nu er data klar
                 //Laver rækken
@@ -111,6 +111,8 @@ function addUser() {
 }
 
 function findSingleUser(userInput) {
+    
+    
 
     let baseUrl = "http://localhost:8080/CourseAssignment2/api/persons/";
 
@@ -121,15 +123,14 @@ function findSingleUser(userInput) {
                 if (response.ok) {
                     return response.json();
                 }
-              
-               
+                console.log(response.json());
+                throw new Error("Der er ikke noget person med de søgekriterier!");
             })
             .then(data => { //nu er data klar
                 console.log(data);
-                console.log(data.firstName); 
+                console.log(data.firstName);
 
                 const rows = data.map(user => `<tr>
-                <td>${user.code}</td>
                                                 <td>${user.personId}</td>
                                                 <td>${user.firstName}</td>
                                                 <td>${user.lastName}</td></tr>`).join("\n");
@@ -152,11 +153,9 @@ function findSingleUser(userInput) {
 
             })
             .catch(error => {
-                document.getElementById("error").innerText = error.message;
+                document.getElementById("error").innerText = error.message ;
             });
 }
-
-
 
 //OPG DELETE AN EXISTING USER
 //document.getElementById("deleteUser").addEventListener("click", deleteUser);
@@ -184,7 +183,7 @@ function deleteUser() {
                 if (response.ok) {
                     return response.json(); //res.jason hvis det er json
                 }
-                throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
+                throw new Error("Noget gik galt med fetch metoden!" + response.json().toString());
             })
             .then(data => { //nu er data klar
 
@@ -268,5 +267,3 @@ function changeUser() {
             });
 
 }
-
-

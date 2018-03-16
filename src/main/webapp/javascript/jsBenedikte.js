@@ -5,7 +5,6 @@ var userInput;
 document.getElementById("btnsend").addEventListener("click", getData);
 //btnsql.addEventListener("click", makeSql);
 
-
 function getData() {
 
     //Get user choice
@@ -21,128 +20,22 @@ function getData() {
     if (ShowAll === "Get All Persons") {
         fetchAllPersons();
     } else if (ShowAll === "Get Person By Id") {
-        checkInput(userInput);
         findSingleUser(userInput);
     }
 
+//    if(getRequest === "Get Person By Id") {
+//        findSingleUser(userInput);
+//    }
 
 
 
-}
-
-
-//
-//document.getElementById("btnsend").onerror=function(userinput){
-//        
-//    let baseUrl = "http://localhost:8080/CourseAssignment2/api/persons/";
-//
-//    let url = baseUrl + userInput;
-//    console.log(url);
-//    fetch(url)
-//            .then(response => {
-//           
-//                    return response.json();
-//               
-//
-//                
-//              
-//                //throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
-//            })
-//            .then(data => { //nu er data klar
-//              
-//    let baseUrl = "http://localhost:8080/CourseAssignment2/api/persons/";
-//
-//    let url = baseUrl + userInput;
-//    console.log(url);
-//    fetch(url)
-//            .then(response => {
-//           
-//                    return response.json();
-//               
-//
-//                
-//              
-//                //throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
-//            })
-//            .then(data => { //nu er data klar
-//                console.log(data);
-//                console.log(data.firstName);
-//        
-//
-//                const errorrows = data.map(error => `<tr>
-//                                                <td>${error.code}</td>
-//                                                <td>${error.description}</td>
-//                                                <td>${error.message}</td></tr>`).join("\n");
-//                //Her laves det som skal udskrives på htmlsiden                                
-//          
-//            
-//            const htmlTable = `<table class="table">
-//                    <thead>
-//                        <tr>
-//                            <th>Code</th>
-//                            <th>Description</th>
-//                            <th>Message</th>
-//                        </tr>
-//                    </thead
-//                    <tbody>
-//                    ${rows}
-//                    </tbody>
-//                </table>`
-//               
-//
-//                document.getElementById("table").innerHTML = htmlTable;
-//                
-//            })
-//       
-//
-//            })
-//            }
-//        
-//        
-
-
-
-//show users
-function fetchAllPersons() {
-
-    fetch("http://localhost:8080/CourseAssignment2/api/persons") //returner objekt som promise
-            .then(response => {
-           
-                response.json();
-                
-                throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
-            })
-            .then(data => { //nu er data klar
-                //Laver rækken
-                const rows = data.map(user => `<tr>
-                                                <td>${user.personId}</td>
-                                                <td>${user.firstName}</td>
-                                                <td>${user.lastName}</td></tr>`).join("\n");
-                //Her laves det som skal udskrives på htmlsiden                                
-                const htmlTable = `<table class="table">
-                    <thead>
-                        <tr>
-                            <th>Person Id</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                        </tr>
-                    </thead
-                    <tbody>
-                    ${rows}
-                    </tbody>
-                </table>
-        `
-                document.getElementById("table").innerHTML = htmlTable;
-            })
-          
 
 }
-//OPG ADD A NEW USER
-//document.getElementById("newUser").addEventListener("click", addUser);
-
 
 
 function findSingleUser(userInput) {
+    
+    
 
     let baseUrl = "http://localhost:8080/CourseAssignment2/api/persons/";
 
@@ -150,15 +43,11 @@ function findSingleUser(userInput) {
     console.log(url);
     fetch(url)
             .then(response => {
-              if (response.ok) {
-                    return response.json();
-                }
-                throw new Error("Noget gik galt med fetch metoden!" + response.json());
+               
             })
-      
             .then(data => { //nu er data klar
                 console.log(data);
-                console.log(data.firstName); 
+            
 
                 const rows = data.map(user => `<tr>
                                                 <td>${user.personId}</td>
@@ -182,12 +71,30 @@ function findSingleUser(userInput) {
                 document.getElementById("table").innerHTML = htmlTable;
 
             })
-         
-}
+            .then(data => { 
+                 const erows = data.map(error => `<tr>
+                                                <td>${error.code}</td>
+                                                <td>${error.message}</td>
+                                                <td>${error.description}</td></tr>`).join("\n");
+                //Her laves det som skal udskrives på htmlsiden                                
+                const ehtmlTable = `<table class="table">
+                    <thead>
+                        <tr>
+                            <th>code</th>
+                            <th>message</th>
+                            <th>description</th>
+                        </tr>
+                    </thead
+                    <tbody>
+                    ${erows}
+                    </tbody>
+                </table>
+                `
+                
+                document.getElementById("error").innerText = ehtmlTable;
+            }  )};
 
 
-
-
-
-
+//OPG DELETE AN EXISTING USER
+//document.getElementById("deleteUser").addEventListener("click", deleteUser);
 

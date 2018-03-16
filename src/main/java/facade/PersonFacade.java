@@ -11,7 +11,9 @@ import javax.persistence.Query;
 
 public class PersonFacade {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
+  
+   EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
+    
     EntityManager em = emf.createEntityManager();
   public static HashMap<Integer, Hobby> hobbies = new HashMap<>();
   public static HashMap<Integer, Person> persons= new HashMap<>();
