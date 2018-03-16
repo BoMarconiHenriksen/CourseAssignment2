@@ -6,7 +6,9 @@
 package rest;
 
 import ExceptionHandling.PersonNotFoundException;
+
 import ExceptionHandling.WebApplicationException;
+
 import com.google.gson.Gson;
 import entity.JSONMessages.JSONMessage;
 import entity.JSONMessages.MessageFacade;
@@ -14,6 +16,7 @@ import entity.JSONMessages.PersonMessage;
 import entity.Person;
 import facade.PersonFacade;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -37,7 +40,7 @@ import javax.ws.rs.core.Response;
  */
 @Path("persons")
 public class PersonsResource {
-
+ PersonFacade pf = new PersonFacade();
     Gson gson = new Gson();
     @Context
     private UriInfo context;
@@ -96,10 +99,36 @@ public class PersonsResource {
 
         ArrayList<JSONMessage> messages = new ArrayList<>();
 
-        Person p = PersonFacade.getPerson(em, id);
-        messages.add(new PersonMessage(p));
+        Person p=PersonFacade.getPerson(em, id);
+            if (p == null) {
+            throw new PersonNotFoundException("No person with that id");
+
+
+            }
+            messages.add(new PersonMessage(p));
+    }
         return gson.toJson(messages);
 
     }
+ @Path("firstName/{firstName}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersonByFirstName(@PathParam("firstName") String firstName) {
 
+        ArrayList<JSONMessage> messages = new ArrayList<>();
+
+        List<Person> p = pf.findPersonByName(firstName);
+        if (p.isEmpty()) {
+            throw new PersonNotFoundException("No persons with that firstname");
+
+        } else {
+            for (int i = 0; i < p.size(); i++) {
+                messages.add(new PersonMessage(p.get(i)));
+            }
+
+            return gson.toJson(messages);
+
+        }
+
+}
 }

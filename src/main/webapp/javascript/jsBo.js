@@ -25,12 +25,13 @@ function getData() {
 //show users
 function fetchAllPersons() {
 
-    fetch("http://localhost:8084/CourseAssignment2/api/persons") //returner objekt som promise
+    fetch("http://localhost:8080/CourseAssignment2/api/persons") //returner objekt som promise
             .then(response => {
                 if (response.ok) {
                     return response.json();
                 }
                 throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
+      console.log(response.json());
             })
             .then(data => { //nu er data klar
                 //Laver rækken
@@ -97,7 +98,7 @@ function fetchAllCompanies()  {
 
 function findSingleUser(userInput) {
 
-    let baseUrl = "http://localhost:8084/CourseAssignment2/api/persons/";
+    let baseUrl = "http://localhost:8080/CourseAssignment2/api/persons/";
 
     let url = baseUrl + userInput;
     console.log(url);
@@ -106,7 +107,8 @@ function findSingleUser(userInput) {
                 if (response.ok) {
                     return response.json();
                 }
-                throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
+                console.log(response.json());
+                throw new Error("Der er ikke noget person med de søgekriterier!");
             })
             .then(data => { //nu er data klar
                 console.log(data);
@@ -135,6 +137,7 @@ function findSingleUser(userInput) {
 
             })
             .catch(error => {
-                document.getElementById("error").innerText = error.message;
+                document.getElementById("error").innerText = error.message ;
             });
 }
+<
