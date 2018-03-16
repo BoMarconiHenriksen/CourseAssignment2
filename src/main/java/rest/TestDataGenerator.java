@@ -139,5 +139,10 @@ public class TestDataGenerator {
 //System.out.println(tdg.getCityInfo(em));
         em.getTransaction().commit();
         em.close();
+        
+        
+        
+        
+        
     }
 }
