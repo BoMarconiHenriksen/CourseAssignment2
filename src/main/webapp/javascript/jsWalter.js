@@ -29,34 +29,34 @@ var storeData = [];
 var storeDataSql = [];
 
 
-submit.addEventListener("click", getInfo);
-btnsql.addEventListener("click", makeSql);
+//submit.addEventListener("click", getInfo);
+//btnsql.addEventListener("click", makeSql);
 
 
 
-var getInfo = submit.onclick = function () {
-
-    if (amount.value <= 500) {
-
-        if (region.value === "All" && gender.value === "both") {
-            fetch('http://uinames.com/api/?amount=' + amount.value).then(jsongetter)
-        }
-        ;
-        if (region.value === "All") {
-            fetch('http://uinames.com/api/?amount=' + amount.value + '&gender=' + gender.value).then(jsongetter)
-        }
-        ;
-        if (gender.value === "both") {
-            fetch('http://uinames.com/api/?amount=' + amount.value + '&region=' + region.value).then(jsongetter)
-        } else {
-            fetch('http://uinames.com/api/?amount=' + amount.value + '&region=' + region.value + '&gender=' + gender.value).then(jsongetter)
-        }
-        ;
-        ;
-    } else {
-        showall.innerHTML = "NEj tak det er alt for meget! (Jeg kunne helt klart godt have fundet på bedre håndtering af 'for meget' problemet)";
-    }
-};
+//var getInfo = submit.onclick = function () {
+//
+//    if (amount.value <= 500) {
+//
+//        if (region.value === "All" && gender.value === "both") {
+//            fetch('http://uinames.com/api/?amount=' + amount.value).then(jsongetter)
+//        }
+//        ;
+//        if (region.value === "All") {
+//            fetch('http://uinames.com/api/?amount=' + amount.value + '&gender=' + gender.value).then(jsongetter)
+//        }
+//        ;
+//        if (gender.value === "both") {
+//            fetch('http://uinames.com/api/?amount=' + amount.value + '&region=' + region.value).then(jsongetter)
+//        } else {
+//            fetch('http://uinames.com/api/?amount=' + amount.value + '&region=' + region.value + '&gender=' + gender.value).then(jsongetter)
+//        }
+//        ;
+//        ;
+//    } else {
+//        showall.innerHTML = "NEj tak det er alt for meget! (Jeg kunne helt klart godt have fundet på bedre håndtering af 'for meget' problemet)";
+//    }
+//};
 
 ////mangler ordentlig fejlhåndtering
 //// nedenstående  bearbejder fetchresponse

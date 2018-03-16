@@ -380,10 +380,10 @@ a:focus, a:hover, a:active {
 }
 
 
- /*Dropdown menu: https://www.w3schools.com/css/tryit.asp?filename=trycss_dropdown_right*/
+ /*Dropdown menu: https://www.w3schools.com/css/tryit.asp?filename=trycss_dropdown_right #4CAF50;*/
 
 .dropbtn {
-    background-color: #4CAF50;
+    background-color: #18BC9C;  
     color: white;
     padding: 12px;
     font-size: 12px;
@@ -421,7 +421,7 @@ a:focus, a:hover, a:active {
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+    background-color: #18BC9C;
 }
 
 #container3{
@@ -431,3 +431,9 @@ a:focus, a:hover, a:active {
     border: 3px solid darkblue;
     margin: auto
 }
+
+.lists div {
+    padding: 3px;text-align: center;} .inputs {
+    margin-bottom:12px;
+}
+
