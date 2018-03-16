@@ -15,9 +15,9 @@ public class CompanyFacade {
     EntityManager em = emf.createEntityManager();
     public static HashMap<Integer, Company> companies = new HashMap<>();
     
-    public List <Company> findCompanyByName(String name)throws ClassCastException {
+    public static List<Company> findCompanyByName(EntityManager em, String name)throws ClassCastException {
 
-        Query q = em.createQuery("Select c from Company c where c.name:name");
+        Query q = em.createQuery("Select c from Company c where c.name=:name");
         q.setParameter("name", name);
         List< Company>companies = (List< Company>) q.getResultList();
         return companies;
@@ -40,7 +40,7 @@ public class CompanyFacade {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         CompanyFacade compaf = new CompanyFacade();
-        System.out.println(compaf.getCompanies(em));
+        System.out.println(compaf.findCompanyByName(em, "Cairo Motors"));
         em.close();
     }
     

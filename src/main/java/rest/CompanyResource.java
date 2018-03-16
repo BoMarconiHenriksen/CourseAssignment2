@@ -5,18 +5,22 @@
  */
 package rest;
 
+import ExceptionHandling.PersonNotFoundException;
 import com.google.gson.Gson;
 import entity.JSONMessages.JSONMessage;
 import entity.JSONMessages.PersonMessage;
 import entity.Company;
 import entity.JSONMessages.CompanyMessage;
+import entity.Person;
 import facade.CompanyFacade;
+import facade.PersonFacade;
 import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -45,9 +49,27 @@ public class CompanyResource {
     public String getallCompanies() {
 
         ArrayList<JSONMessage> messages = new ArrayList<>();
-        CompanyFacade cmFacade = new CompanyFacade();
-        cmFacade.getCompanies(em);
+        CompanyFacade.getCompanies(em);
         for (Company c : CompanyFacade.companies.values()) {
+
+            messages.add(new CompanyMessage(c));
+        }
+
+        return gson.toJson(messages);
+
+    }
+    
+    @Path("/{name}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getCompanyByName(@PathParam("name") String name) {
+
+        ArrayList<JSONMessage> messages = new ArrayList<>();
+       Company c = (Company) CompanyFacade.findCompanyByName(em, name);
+        if (c == null) {
+            throw new PersonNotFoundException("No person with that id");
+
+        } else {
 
             messages.add(new CompanyMessage(c));
         }
