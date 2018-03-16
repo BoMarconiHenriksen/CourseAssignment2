@@ -5,7 +5,6 @@
  */
 package rest;
 
-import ExceptionHandling.PersonNotFoundException;
 import com.google.gson.Gson;
 import entity.JSONMessages.JSONMessage;
 import entity.JSONMessages.MessageFacade;
@@ -13,21 +12,21 @@ import entity.JSONMessages.PersonMessage;
 import entity.Person;
 import facade.PersonFacade;
 import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriInfo;
+
 
 /**
  * REST Web Service
@@ -42,11 +41,11 @@ public class PersonsResource {
     private UriInfo context;
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
     EntityManager em = emf.createEntityManager();
-    PersonFacade pf = new PersonFacade();
 
     public PersonsResource() {
     }
 
+    
     @Path("{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -54,26 +53,27 @@ public class PersonsResource {
         Person pStart = PersonFacade.getPerson(em, personId);
         Person pEnd = MessageFacade.fromJson(content, PersonMessage.class);
         pEnd.setId(pStart.getId());
-        deletePersonById(personId);
+        deletePersonById(personId);     
         PersonFacade.createPerson(em, pEnd);
-
+        
     }
-
+    
     @Path("{id}")
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     public void deletePersonById(@PathParam("id") int personId) {
         PersonFacade.deletePersonById(em, personId);
     }
-
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void addPerson(String json) {
         Person p = MessageFacade.fromJson(json, PersonMessage.class);
         PersonFacade.createPerson(em, p);
-
+        
+        
     }
-
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
@@ -95,40 +95,14 @@ public class PersonsResource {
     public String getPersonById(@PathParam("id") Integer id) {
 
         ArrayList<JSONMessage> messages = new ArrayList<>();
-
-        Person p = PersonFacade.getPerson(em, id);
-        if (p == null) {
-            throw new PersonNotFoundException("No person with that id");
-
-        } else {
+        Person p=PersonFacade.getPerson(em, id);
+        
 
             messages.add(new PersonMessage(p));
-        }
+     
 
         return gson.toJson(messages);
 
     }
 
-    @Path("firstName/{firstName}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonByFirstName(@PathParam("firstName") String firstName) {
-
-        ArrayList<JSONMessage> messages = new ArrayList<>();
-
-        List<Person> p = pf.findPersonByName(firstName);
-        if (p.isEmpty()) {
-            throw new PersonNotFoundException("No persons with that firstname");
-
-        } else {
-            for (int i = 0; i < p.size(); i++) {
-                messages.add(new PersonMessage(p.get(i)));
-            }
-
-            return gson.toJson(messages);
-
-        }
-
-    }
 }
-
