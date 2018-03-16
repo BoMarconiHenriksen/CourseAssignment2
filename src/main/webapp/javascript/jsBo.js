@@ -71,7 +71,7 @@ function fetchAllPersons() {
 }
 
 //OPG ADD A NEW USER
-document.getElementById("newUser").addEventListener("click", addUser);
+//document.getElementById("newUser").addEventListener("click", addUser);
 
 function addUser() {
 
@@ -155,7 +155,7 @@ function findSingleUser(userInput) {
 }
 
 //OPG DELETE AN EXISTING USER
-document.getElementById("deleteUser").addEventListener("click", deleteUser);
+//document.getElementById("deleteUser").addEventListener("click", deleteUser);
 
 function deleteUser() {
     let idDelete = document.getElementById("deleteIdUser").value;
@@ -192,7 +192,7 @@ function deleteUser() {
 }
 
 //OPG EDIT AN EXISTING USER
-document.getElementById("changeUSer").onclick = changeUser;
+//document.getElementById("changeUSer").onclick = changeUser;
 
 function changeUser() {
     let idChangedUser = document.getElementById("userId").value;
