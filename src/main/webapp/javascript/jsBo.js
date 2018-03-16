@@ -111,6 +111,8 @@ function addUser() {
 }
 
 function findSingleUser(userInput) {
+    
+    
 
     let baseUrl = "http://localhost:8084/CourseAssignment2/api/persons/";
 
