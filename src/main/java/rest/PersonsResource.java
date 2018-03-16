@@ -98,8 +98,11 @@ public class PersonsResource {
 
         ArrayList<JSONMessage> messages = new ArrayList<>();
         Person p=PersonFacade.getPerson(em, id);
-        
+            if (p == null) {
+            throw new PersonNotFoundException("No person with that id");
 
+
+            }
             messages.add(new PersonMessage(p));
      
 

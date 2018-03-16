@@ -40,7 +40,7 @@ function fetchAllPersons() {
                 if (response.ok) {
                     return response.json();
                 }
-                throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
+                throw new Error("Noget gik galt med fetch metoden!" + response.json());
             })
             .then(data => { //nu er data klar
                 //Laver rækken
@@ -112,7 +112,7 @@ function addUser() {
 
 function findSingleUser(userInput) {
 
-    let baseUrl = "http://localhost:8084/CourseAssignment2/api/persons/";
+    let baseUrl = "http://localhost:8080/CourseAssignment2/api/persons/";
 
     let url = baseUrl + userInput;
     console.log(url);
@@ -121,13 +121,15 @@ function findSingleUser(userInput) {
                 if (response.ok) {
                     return response.json();
                 }
-                throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
+              
+               
             })
             .then(data => { //nu er data klar
                 console.log(data);
-                console.log(data.firstName);
+                console.log(data.firstName); 
 
                 const rows = data.map(user => `<tr>
+                <td>${user.code}</td>
                                                 <td>${user.personId}</td>
                                                 <td>${user.firstName}</td>
                                                 <td>${user.lastName}</td></tr>`).join("\n");
@@ -153,6 +155,8 @@ function findSingleUser(userInput) {
                 document.getElementById("error").innerText = error.message;
             });
 }
+
+
 
 //OPG DELETE AN EXISTING USER
 //document.getElementById("deleteUser").addEventListener("click", deleteUser);
