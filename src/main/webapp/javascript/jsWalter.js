@@ -29,8 +29,8 @@ var storeData = [];
 var storeDataSql = [];
 
 
-submit.addEventListener("click", getInfo);
-btnsql.addEventListener("click", makeSql);
+//submit.addEventListener("click", getInfo);
+//btnsql.addEventListener("click", makeSql);
 
 
 

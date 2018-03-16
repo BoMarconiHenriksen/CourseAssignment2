@@ -1,7 +1,41 @@
-//show users
-function table() {
+var userInput;
 
-    fetch("http://localhost:3000/users") //returner objekt som promise
+
+//submit.addEventListener("click", getInfo);
+document.getElementById("btnsend").addEventListener("click", getData);
+//btnsql.addEventListener("click", makeSql);
+
+function getData() {
+    
+    //Get user choice
+    //showAll bruges til getAll requests
+    let ShowAll = document.getElementById("all").value;
+    
+    //getRequest bruges til specifikke requests
+//    let getRequest = document.getElementById("request").value;
+    
+    //userInput bruges til at fange brguernes input
+    userInput = document.getElementById("userInput").value;
+    
+    if(ShowAll === "Get All Persons") {
+        fetchAllPersons();
+    } else if(ShowAll === "Get Person By Id") {
+        findSingleUser(userInput);
+    }
+    
+//    if(getRequest === "Get Person By Id") {
+//        findSingleUser(userInput);
+//    }
+    
+    
+    
+    
+}
+
+//show users
+function fetchAllPersons() {
+
+    fetch("http://localhost:8084/CourseAssignment2/api/persons") //returner objekt som promise
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -11,18 +45,16 @@ function table() {
             .then(data => { //nu er data klar
                 //Laver rækken
                 const rows = data.map(user => `<tr>
-                                                <td>${user.name}</td>
-                                                <td>${user.age}</td>
-                                                <td>${user.gender}</td>
-                                                <td>${user.email}</td></tr>`).join("\n");
+                                                <td>${user.personId}</td>
+                                                <td>${user.firstName}</td>
+                                                <td>${user.lastName}</td></tr>`).join("\n");
                 //Her laves det som skal udskrives på htmlsiden                                
                 const htmlTable = `<table class="table">
                     <thead>
                         <tr>
+                            <th>Person Id</th>
                             <th>First Name</th>
-                            <th>Age</th>
-                            <th>Gender</th>
-                            <th>Email</th>
+                            <th>Last Name</th>
                         </tr>
                     </thead
                     <tbody>
@@ -78,16 +110,12 @@ function addUser() {
 
 }
 
-//OPG FIND SINGLE USER
-document.getElementById("findUser").addEventListener("click", findSingleUser);
+function findSingleUser(userInput) {
 
-function findSingleUser() {
-    let id = document.getElementById("enteredId").value;
+    let baseUrl = "http://localhost:8084/CourseAssignment2/api/persons/";
 
-    let baseUrl = "http://localhost:3000/users/";
-
-    let url = baseUrl + id;
-
+    let url = baseUrl + userInput;
+    console.log(url);
     fetch(url)
             .then(response => {
                 if (response.ok) {
@@ -98,13 +126,11 @@ function findSingleUser() {
             .then(data => { //nu er data klar
 
                 //Udskriver brugeren
-                var user = "id: " + data.id + "<br>"
-                        + "Name: " + data.name + "<br>"
-                        + "Age: " + data.age + "<br>"
-                        + "Gender: " + data.gender + "<br>"
-                        + "Email: " + data.email + "<br>";
+                var user = "id: "  + data.personId + "<br>"
+                        + "Name: " + data.firstName + "<br>"
+                        + "Age: " + data.lastName + "<br>"
 
-                document.getElementById("theUser").innerHTML = user;
+                document.getElementById("table").innerHTML = user;
             })
             .catch(error => {
                 document.getElementById("error").innerText = error.message;
