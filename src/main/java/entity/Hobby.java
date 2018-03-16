@@ -79,11 +79,6 @@ public class Hobby implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-     public void givePersons(Person p) {
-
-        p.getHobbies().add(this);
-    }
-     
 
     @Override
     public boolean equals(Object object) {
