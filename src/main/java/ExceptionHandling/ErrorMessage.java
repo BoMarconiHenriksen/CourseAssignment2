@@ -26,12 +26,7 @@ public class ErrorMessage {
             ex.printStackTrace(new PrintWriter(sw));
             this.stackTrace = sw.toString();
         }
-        
      
-    }
-
-    public ErrorMessage(String description) {
-        this.description = description;
     }
 
     public String getDescription() {
@@ -65,10 +60,5 @@ public class ErrorMessage {
 
     public void setStackTrace(String stackTrace) {
         this.stackTrace = stackTrace;
-    }
-
-    @Override
-    public String toString() {
-        return "ErrorMessage{" + "code=" + code + ", message=" + message + ", description=" + description + ", stackTrace=" + stackTrace + '}';
     }
 }
