@@ -15,6 +15,7 @@ import entity.Person;
 import facade.CompanyFacade;
 import facade.PersonFacade;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -59,23 +60,26 @@ public class CompanyResource {
 
     }
     
-    @Path("/{name}")
+    @Path("name/{name}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getCompanyByName(@PathParam("name") String name) {
 
         ArrayList<JSONMessage> messages = new ArrayList<>();
-       Company c = (Company) CompanyFacade.findCompanyByName(em, name);
-        if (c == null) {
-            throw new PersonNotFoundException("No person with that id");
+       List<Company> c = cmFacade.findCompanyByName(em, name);
+        if (c.isEmpty()) {
+            throw new PersonNotFoundException("No persons with that firstname");
 
         } else {
+            for (int i = 0; i < c.size(); i++) {
+                messages.add(new CompanyMessage(c.get(i)));
+            }
 
-            messages.add(new CompanyMessage(c));
+            return gson.toJson(messages);
+        
         }
-
-        return gson.toJson(messages);
-
-    }
+    
+}
+    
     
 }
