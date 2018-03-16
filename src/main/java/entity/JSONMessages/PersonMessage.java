@@ -43,5 +43,18 @@ public class PersonMessage implements JSONMessage<Person> {
         return new Person(firstName, lastName,hobbies);
     }
 
- 
+    /**
+     *
+     *
+     * @return
+     */
+//    @Override
+//    public Person toInternal() {
+//        ArrayList<Address> adresses = new ArrayList<>();
+//        for (Address id : addresses) {
+//            adresses.add(PersonFacade.findAddresses(id.id));
+//        }
+//        return new Person(firstName, lastName, personId, adresses);
+//    }
+
 }

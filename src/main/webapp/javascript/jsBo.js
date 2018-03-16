@@ -6,30 +6,30 @@ document.getElementById("btnsend").addEventListener("click", getData);
 //btnsql.addEventListener("click", makeSql);
 
 function getData() {
-    
+
     //Get user choice
     //showAll bruges til getAll requests
     let ShowAll = document.getElementById("all").value;
-    
+
     //getRequest bruges til specifikke requests
 //    let getRequest = document.getElementById("request").value;
-    
+
     //userInput bruges til at fange brguernes input
     userInput = document.getElementById("userInput").value;
-    
-    if(ShowAll === "Get All Persons") {
+
+    if (ShowAll === "Get All Persons") {
         fetchAllPersons();
-    } else if(ShowAll === "Get Person By Id") {
+    } else if (ShowAll === "Get Person By Id") {
         findSingleUser(userInput);
     }
-    
+
 //    if(getRequest === "Get Person By Id") {
 //        findSingleUser(userInput);
 //    }
-    
-    
-    
-    
+
+
+
+
 }
 
 //show users
@@ -71,7 +71,7 @@ function fetchAllPersons() {
 }
 
 //OPG ADD A NEW USER
-document.getElementById("newUser").addEventListener("click", addUser);
+//document.getElementById("newUser").addEventListener("click", addUser);
 
 function addUser() {
 
@@ -111,6 +111,8 @@ function addUser() {
 }
 
 function findSingleUser(userInput) {
+    
+    
 
     let baseUrl = "http://localhost:8084/CourseAssignment2/api/persons/";
 
@@ -124,13 +126,30 @@ function findSingleUser(userInput) {
                 throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
             })
             .then(data => { //nu er data klar
+                console.log(data);
+                console.log(data.firstName);
 
-                //Udskriver brugeren
-                var user = "id: "  + data.personId + "<br>"
-                        + "Name: " + data.firstName + "<br>"
-                        + "Age: " + data.lastName + "<br>"
+                const rows = data.map(user => `<tr>
+                                                <td>${user.personId}</td>
+                                                <td>${user.firstName}</td>
+                                                <td>${user.lastName}</td></tr>`).join("\n");
+                //Her laves det som skal udskrives på htmlsiden                                
+                const htmlTable = `<table class="table">
+                    <thead>
+                        <tr>
+                            <th>Person Id</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                        </tr>
+                    </thead
+                    <tbody>
+                    ${rows}
+                    </tbody>
+                </table>
+                `
 
-                document.getElementById("table").innerHTML = user;
+                document.getElementById("table").innerHTML = htmlTable;
+
             })
             .catch(error => {
                 document.getElementById("error").innerText = error.message;
@@ -138,7 +157,7 @@ function findSingleUser(userInput) {
 }
 
 //OPG DELETE AN EXISTING USER
-document.getElementById("deleteUser").addEventListener("click", deleteUser);
+//document.getElementById("deleteUser").addEventListener("click", deleteUser);
 
 function deleteUser() {
     let idDelete = document.getElementById("deleteIdUser").value;
@@ -175,7 +194,7 @@ function deleteUser() {
 }
 
 //OPG EDIT AN EXISTING USER
-document.getElementById("changeUSer").onclick = changeUser;
+//document.getElementById("changeUSer").onclick = changeUser;
 
 function changeUser() {
     let idChangedUser = document.getElementById("userId").value;

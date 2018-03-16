@@ -5774,7 +5774,7 @@ button.close {
 }
 
 .bs-popover-bottom .arrow, .bs-popover-auto[x-placement^="bottom"] .arrow {
-  top: calc(-0.5rem - 1px);
+  top: calc((0.5rem + 1px) * -1);
 }
 
 .bs-popover-bottom .arrow::before, .bs-popover-auto[x-placement^="bottom"] .arrow::before,
@@ -5808,7 +5808,7 @@ button.close {
 }
 
 .bs-popover-left .arrow, .bs-popover-auto[x-placement^="left"] .arrow {
-  right: calc(-0.5rem -1px) );
+  right: calc((0.5rem + 1px) * -1);
   width: 0.5rem;
   height: 1rem;
   margin: 0.3rem 0;
@@ -5893,7 +5893,7 @@ button.close {
   transform: translateX(0);
 }
 
-@supports ((-webkit-transform-style:preserve-3d) or (transform-style: preserve-3d)) {
+@supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {
   .carousel-item-next.carousel-item-left,
   .carousel-item-prev.carousel-item-right {
     -webkit-transform: translate3d(0, 0, 0);

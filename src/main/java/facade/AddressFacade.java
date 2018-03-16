@@ -10,7 +10,7 @@ import javax.persistence.Query;
 
 public class AddressFacade {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
     EntityManager em = emf.createEntityManager();
 
     public Address findAddress(long id) {
@@ -55,11 +55,11 @@ public class AddressFacade {
 
     public static void main(String[] args) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         AddressFacade af = new AddressFacade();
-        System.out.println(af.findAddress(1L));
+        System.out.println(af.getAddresses());
         em.close();
     }
 
