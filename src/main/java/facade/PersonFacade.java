@@ -15,7 +15,6 @@ public class PersonFacade {
    EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
     
     EntityManager em = emf.createEntityManager();
-  public static HashMap<Integer, Hobby> hobbies = new HashMap<>();
   public static HashMap<Integer, Person> persons= new HashMap<>();
     
   
@@ -45,10 +44,7 @@ public class PersonFacade {
     }
     
     
-    public static List <Hobby> findHobbiesById(Long id){
-        return (List<Hobby>) hobbies.get(id);
-        
-    }
+    
     public List<Person> getpersonsbyCity(String city) {
 
         Query q = em.createQuery("SELECT p FROM Person p, Address a, CityInfo c,  join p.address=a.cityinfo WHERE a.cityinfo=:city");

@@ -9,6 +9,7 @@ package entity.JSONMessages;
 import entity.Address;
 import entity.Hobby;
 import entity.Person;
+import facade.HobbyFacade;
 import facade.PersonFacade;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,24 +38,12 @@ public class PersonMessage implements JSONMessage<Person> {
     public Person toInternal() {
         ArrayList<Hobby>hobbies=new ArrayList();
         for (Hobby id :hobbies){
-            hobbies.add((Hobby) PersonFacade.findHobbiesById(id.id));
+            hobbies.add((Hobby) HobbyFacade.hobbies.get(id.id));
         
     }
         return new Person(firstName, lastName,hobbies);
     }
 
-    /**
-     *
-     *
-     * @return
-     */
-//    @Override
-//    public Person toInternal() {
-//        ArrayList<Address> adresses = new ArrayList<>();
-//        for (Address id : addresses) {
-//            adresses.add(PersonFacade.findAddresses(id.id));
-//        }
-//        return new Person(firstName, lastName, personId, adresses);
-//    }
+
 
 }

@@ -1,9 +1,6 @@
 package facade;
 
 import entity.InfoEntity;
-import entity.Person;
-import static facade.PersonFacade.getpersons;
-import static facade.PersonFacade.persons;
 import java.util.HashMap;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -23,7 +20,7 @@ public class InfoEntityFacade {
 
     HashMap<Integer, InfoEntity> infoEntitites = new HashMap<>();
 
-    public  InfoEntity getInfoEntity(EntityManager em,Long id) {
+    public InfoEntity getInfoEntity(EntityManager em, Long id) {
         return getInfoEntities(em).get(id);
 
     }

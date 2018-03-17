@@ -7,6 +7,7 @@ import entity.Hobby;
 import entity.InfoEntity;
 import entity.Person;
 import entity.Phone;
+import facade.HobbyFacade;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -83,7 +84,7 @@ public class TestDataGenerator {
 
         for (int i = 0; i < 49; i++) {
 //            createTestAddresses(em);
-            ie = new Person(df.getFirstName(), df.getLastName(), getAddresses(em).get(i), df.getEmailAddress());
+            ie = new Person(getAddresses(em).get(i), df.getEmailAddress(),df.getFirstName(), df.getLastName(),  createHobbyLists(em));
             em.persist(ie);
 
         }
@@ -114,6 +115,18 @@ public class TestDataGenerator {
         }
 
     }
+    public List<Hobby> createHobbyLists(EntityManager em){
+        List<Hobby>hobbies= new ArrayList<>();
+        Hobby h ;
+        for (int i =0;i<Math.random()*30;i++){
+            for (int j= 0;j<Math.random()*5;j++){
+            h=HobbyFacade.getHobbies(em).get(j);
+            hobbies.add(h);
+        }
+      
+    }
+         return hobbies;
+    }
 
     public List<InfoEntity> getInfoEntities(EntityManager em) {
         List<InfoEntity> ies;
@@ -143,12 +156,12 @@ public class TestDataGenerator {
         em.getTransaction().begin();
 
         tdg.createTestAddresses(em);
-
-        tdg.createTestPersons(em);
         tdg.createHobbies(em);
+        tdg.createTestPersons(em);
+        
         tdg.createTestCompanies(em);
         tdg.createPhones(em);
-//System.out.println(tdg.getCityInfo(em));
+System.out.println(tdg.getCityInfo(em));
         em.getTransaction().commit();
         em.close();
     }

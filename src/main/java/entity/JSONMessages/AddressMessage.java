@@ -41,17 +41,18 @@ public class AddressMessage implements JSONMessage<Address> {
     @Override
     public Address toInternal() {
         return null;
+        
 //         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
 //    
 //    EntityManager em = emf.createEntityManager();
 //   InfoEntityFacade ifa = new InfoEntityFacade();
 //   InfoEntity ie = null;
-//        ArrayList<Phone> phones = new ArrayList<>();
+//        List<Phone> phones = new ArrayList<>();
 //        for (Phone id : phones) {
 //            phones.add(ie.getPhones().get(id.getNumber()));
 //        }
-//        return new InfoEntity(ie.id, ie.getAddress(), ie.id,phones) {};
-    
+//        return new InfoEntity( ie.getId(),ie.getAddress(),ie.getEmail(), phones) {};
+//    
     }}
    
   
