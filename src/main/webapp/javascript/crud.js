@@ -1,79 +1,64 @@
-
 document.getElementById("btncrud").addEventListener("click", getUserInput);
 document.getElementById("crud").addEventListener("change", changeInputFields);
 
 function changeInputFields() {
-
+    event.stopPropagation();
     let changeSelection = document.getElementById("crud").value;
 
     if (changeSelection === "updatePerson") {
-        const htmlInputField = ` <p>If there is a part you dont want to cange let the input field be empty</p>
-                                    <div class='inputs form-group' id="btns">
-                                    <p>Change Fisrt Name: </p>
-                                    <input id="newFirstName" placeholder='Add new first name' />
-                                </div>
-                                <div class='inputs form-group' id="btns"> 
-                                    <p>Change Last Name: </p>
-                                    <input id="newLastName" placeholder='Add new last name' />
-                                </div>
-        `
-        document.getElementById("showcrud").innerHTML = htmlInputField;
+        htmlUpdatePerson();
     } else if (changeSelection === "deletePerson") {
         const htmlInputField = ``
         document.getElementById("showcrud").innerHTML = htmlInputField;
-    } else if(changeSelection === "newPerson") {
-        const htmlInputField = ` <p>Enter the name and last name of the new person</p>
-                                    <div class='inputs form-group' id="btns">
-                                    <p>Enter Fisrt Name: </p>
-                                    <input id="newFirstName" placeholder='Add first name' />
-                                </div>
-                                <div class='inputs form-group' id="btns"> 
-                                    <p>Enter Last Name: </p>
-                                    <input id="newLastName" placeholder='Add last name' />
-                                </div>
-        `
-        document.getElementById("showcrud").innerHTML = htmlInputField;
+    } else if (changeSelection === "newPerson") {
+        htmlNewPerson();
     }
 
 }
 
 function getUserInput() {
-
+    event.stopPropagation();
     //Get user choice
     //showInput bruges til getAll requests
     let ShowInput = document.getElementById("crud").value;
-
+    console.log(ShowInput);
     //userInput bruges til at fange brguernes input
-    userInput = document.getElementById("userInputCrud").value;
+    var userInput = document.getElementById("userInputCrud").value;
+    console.log(userInput);
 
-    if (ShowInput === "Update Person") {
 
+    if (ShowInput === "updatePerson") {
+
+        let id = document.getElementById("id").value;
+        let newFirstName = document.getElementById("newFirstName").value;
+        let newLastName = document.getElementById("newLastName").value;
+
+        changeUser(id, newFirstName, newLastName);
+    } else if (ShowInput === "newPerson") {
+
+        let firstName = document.getElementById("newFirstName").value;
+        let lastName = document.getElementById("newLastName").value;
+        
+        addUser(firstName, lastName);
+
+    } else if(ShowInput === "deletePerson") {
+        deleteUser(userInput);
     }
 
 
 }
 
-function addUser() {
-
-    //Henter info fra input felterne
-    let name = document.getElementById("name").value;
-    let age = document.getElementById("age").value;
-    let gender = document.getElementById("gender").value;
-    let email = document.getElementById("email").value;
-
+function addUser(firstName, lastName) {
+    
     //clear the input fields
-    document.getElementById("name").value = "";
-    document.getElementById("age").value = "";
-    document.getElementById("gender").value = "";
-    document.getElementById("email").value = "";
+    document.getElementById("newFirstName").value = "";
+    document.getElementById("newLastName").value = "";
 
-    document.getElementById("added").innerHTML = "The user is added.";
+//    document.getElementById("added").innerHTML = "The user was added.";
 
     var newUser = {
-        age: age,
-        name: name,
-        gender: gender,
-        email: email
+        firstName: firstName,
+        lastName: lastName
     }
 
     var settings = {
@@ -84,24 +69,24 @@ function addUser() {
         method: 'POST', // *GET, PUT, DELETE, etc.
     }
 
-    fetch("http://localhost:3000/users", settings)
+    fetch("https://benedikteeva.dk/CourseAssignment2-1.0-SNAPSHOT/api/persons", settings)
             .then(res => res.json()) //ta json resopnse og send det videre
 //            .then(data => document.getElementById("name").innerText = data.name) //data er bare et navn
 
 }
 
-function deleteUser() {
-    let idDelete = document.getElementById("deleteIdUser").value;
+function deleteUser(userInput) {
+//    let idDelete = document.getElementById("deleteIdUser").value;
 
     //clear the input fields
-    document.getElementById("deleteIdUser").value = "";
+    document.getElementById("userInputCrud").value = "";
 
-    let baseUrl = "http://localhost:3000/users/";
-
-    let urlDelete = baseUrl + idDelete;
+    let baseUrl = "https://benedikteeva.dk/CourseAssignment2-1.0-SNAPSHOT/api/persons/";
+    let urlDelete = baseUrl + userInput;
+    console.log(urlDelete);
 
     let settings = {
-        body: JSON.stringify(newUser), // must match 'Content-Type' header. Fra java object til json
+        body: JSON.stringify(), // must match 'Content-Type' header. Fra java object til json
         headers: {
             'content-type': 'application/json'
         },
@@ -117,28 +102,25 @@ function deleteUser() {
             })
             .then(data => { //nu er data klar
 
-                document.getElementById("userDeleted").innerHTML = "The user is deleted!";
+                document.getElementById("added").innerHTML = "The user is deleted!";
             })
             .catch(error => {
                 document.getElementById("error").innerText = error.message;
             });
 }
 
-function changeUser() {
-    let idChangedUser = document.getElementById("userId").value;
-    let newName = document.getElementById("newName").value;
-    let ageChange = document.getElementById("ageChange").value;
-    let genderChange = document.getElementById("genderChange").value;
-    let emailChange = document.getElementById("emailChange").value;
+function changeUser(id, newFirstName, newLastName) {
+    console.log("changeuser");
+    console.log(id);
+    console.log(newFirstName);
+    console.log(newLastName);
 
-    let baseUrlFor = "http://localhost:3000/users/";
+    let baseUrl = "https://benedikteeva.dk/CourseAssignment2-1.0-SNAPSHOT/api/persons/";
 
-    let urlChange = baseUrlFor + idChangedUser;
-
-
+    let urlToFetch = baseUrl + id;
 
     //Find the user to change
-    fetch(urlChange)
+    fetch(baseUrl)
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -148,31 +130,19 @@ function changeUser() {
             .then(data => { //nu er data klar
 
                 //Hvis feltet er tomt indsættes det som står i json filen.
-                if (ageChange == undefined || ageChange === "") {
-                    ageChange = data.age;
+                if (newFirstName == undefined || newFirstName === "") {
+                    newFirstName = data.firstName;
                 }
 
                 //Hvis feltet er tomt indsættes det som står i json filen.
-                if (newName === undefined || newName === "") {
-                    newName = data.name;
-                }
-
-                //Hvis feltet er tomt indsættes det som står i json filen.
-                if (genderChange == undefined || genderChange === "") {
-                    genderChange = data.gender;
-                }
-
-                //Hvis feltet er tomt indsættes det som står i json filen.
-                if (emailChange == undefined || emailChange === "") {
-                    emailChange = data.email;
+                if (newLastName === undefined || newLastName === "") {
+                    newLastName = data.lastName;
                 }
 
                 //Hvis feltet er tomt indsættes det som står i json filen.
                 let newUser = {
-                    age: ageChange,
-                    name: newName,
-                    gender: genderChange,
-                    email: emailChange
+                    firstName: newFirstName,
+                    lastName: newLastName
                 }
 
                 let settings = {
@@ -183,7 +153,7 @@ function changeUser() {
                     method: 'PUT', // *GET, PUT, DELETE, etc.
                 }
 
-                fetch(urlChange, settings)
+                fetch(urlToFetch, settings)
                         .then(res => res.json()) //ta json resopnse og send det videre
 //            .then(data => document.getElementById("name").innerText = data.name) //data er bare et navn
 
@@ -193,5 +163,37 @@ function changeUser() {
                 document.getElementById("error").innerText = error.message;
             });
 
+}
+
+function htmlUpdatePerson() {
+    const htmlInputField = ` <p>If there is a part you dont want to cange let the input field be empty</p>
+                                <div class='inputs form-group' id="btns">
+                                    <p>Enter Id: </p>
+                                    <input id="id" placeholder='Add the person id' />
+                                </div>
+                                <div class='inputs form-group' id="btns">
+                                    <p>Change Fisrt Name: </p>
+                                    <input id="newFirstName" placeholder='Add new first name' />
+                                </div>
+                                <div class='inputs form-group' id="btns"> 
+                                    <p>Change Last Name: </p>
+                                    <input id="newLastName" placeholder='Add new last name' />
+                                </div>
+        `
+    document.getElementById("showcrud").innerHTML = htmlInputField;
+}
+
+function htmlNewPerson() {
+    const htmlInputField = ` <p>Enter the name and last name of the new person</p>
+                                    <div class='inputs form-group' id="btns">
+                                    <p>Enter Fisrt Name: </p>
+                                    <input id="newFirstName" placeholder='Add first name' />
+                                </div>
+                                <div class='inputs form-group' id="btns"> 
+                                    <p>Enter Last Name: </p>
+                                    <input id="newLastName" placeholder='Add last name' />
+                                </div>
+        `
+    document.getElementById("showcrud").innerHTML = htmlInputField;
 }
 
