@@ -40,7 +40,8 @@ import javax.ws.rs.core.Response;
  */
 @Path("persons")
 public class PersonsResource {
- PersonFacade pf = new PersonFacade();
+
+    PersonFacade pf = new PersonFacade();
     Gson gson = new Gson();
     @Context
     private UriInfo context;
@@ -99,18 +100,13 @@ public class PersonsResource {
 
         ArrayList<JSONMessage> messages = new ArrayList<>();
 
-        Person p=PersonFacade.getPerson(em, id);
-            if (p == null) {
-            throw new PersonNotFoundException("No person with that id");
+        Person p = PersonFacade.getPerson(em, id);
+        messages.add(new PersonMessage(p));
 
-
-            }
-            messages.add(new PersonMessage(p));
-    }
         return gson.toJson(messages);
-
     }
- @Path("firstName/{firstName}")
+
+    @Path("firstName/{firstName}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getPersonByFirstName(@PathParam("firstName") String firstName) {
@@ -130,5 +126,5 @@ public class PersonsResource {
 
         }
 
-}
+    }
 }
