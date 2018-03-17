@@ -25,7 +25,7 @@ function getData() {
 //show users
 function fetchAllPersons() {
 
-    fetch("http://localhost:8080/CourseAssignment2/api/persons") //returner objekt som promise
+    fetch("https://benedikteeva.dk/CourseAssignment2-1.0-SNAPSHOT/api/persons") //returner objekt som promise
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -62,7 +62,7 @@ function fetchAllPersons() {
 }
 
 function fetchAllCompanies()  {
-    fetch("http://localhost:8084/CourseAssignment2/api/companies") //returner objekt som promise
+    fetch("https://benedikteeva.dk/CourseAssignment2-1.0-SNAPSHOT/api/companies") //returner objekt som promise
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -98,7 +98,7 @@ function fetchAllCompanies()  {
 
 function findSingleUser(userInput) {
 
-    let baseUrl = "http://localhost:8080/CourseAssignment2/api/persons/";
+    let baseUrl = "https://benedikteeva.dk/CourseAssignment2-1.0-SNAPSHOT/api/persons/";
 
     let url = baseUrl + userInput;
     console.log(url);
@@ -137,7 +137,6 @@ function findSingleUser(userInput) {
 
             })
             .catch(error => {
-                document.getElementById("error").innerText = error.message ;
+                document.getElementById("error").innerText = error.message;
             });
 }
-<

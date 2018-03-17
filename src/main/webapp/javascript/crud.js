@@ -1,14 +1,56 @@
 
 document.getElementById("btncrud").addEventListener("click", getUserInput);
+document.getElementById("crud").addEventListener("change", changeInputFields);
+
+function changeInputFields() {
+
+    let changeSelection = document.getElementById("crud").value;
+
+    if (changeSelection === "updatePerson") {
+        const htmlInputField = ` <p>If there is a part you dont want to cange let the input field be empty</p>
+                                    <div class='inputs form-group' id="btns">
+                                    <p>Change Fisrt Name: </p>
+                                    <input id="newFirstName" placeholder='Add new first name' />
+                                </div>
+                                <div class='inputs form-group' id="btns"> 
+                                    <p>Change Last Name: </p>
+                                    <input id="newLastName" placeholder='Add new last name' />
+                                </div>
+        `
+        document.getElementById("showcrud").innerHTML = htmlInputField;
+    } else if (changeSelection === "deletePerson") {
+        const htmlInputField = ``
+        document.getElementById("showcrud").innerHTML = htmlInputField;
+    } else if(changeSelection === "newPerson") {
+        const htmlInputField = ` <p>Enter the name and last name of the new person</p>
+                                    <div class='inputs form-group' id="btns">
+                                    <p>Enter Fisrt Name: </p>
+                                    <input id="newFirstName" placeholder='Add first name' />
+                                </div>
+                                <div class='inputs form-group' id="btns"> 
+                                    <p>Enter Last Name: </p>
+                                    <input id="newLastName" placeholder='Add last name' />
+                                </div>
+        `
+        document.getElementById("showcrud").innerHTML = htmlInputField;
+    }
+
+}
 
 function getUserInput() {
-    
+
     //Get user choice
-    //showAll bruges til getAll requests
+    //showInput bruges til getAll requests
     let ShowInput = document.getElementById("crud").value;
 
     //userInput bruges til at fange brguernes input
     userInput = document.getElementById("userInputCrud").value;
+
+    if (ShowInput === "Update Person") {
+
+    }
+
+
 }
 
 function addUser() {
