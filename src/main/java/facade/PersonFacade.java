@@ -25,6 +25,7 @@ public class PersonFacade {
         em.getTransaction().begin();
 
         em.remove(p);//createQuery("DELETE from person where ID="+personId);
+        
         em.getTransaction().commit();
     }
   
@@ -76,7 +77,12 @@ public class PersonFacade {
    
     
     public static void main(String[] args) {
-        
+          
+   EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
+    
+    EntityManager em = emf.createEntityManager();
+        PersonFacade pf = new PersonFacade();
+        pf.deletePersonById(em, 785L);
         
     }
 
