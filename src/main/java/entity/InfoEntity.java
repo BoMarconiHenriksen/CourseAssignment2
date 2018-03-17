@@ -49,6 +49,11 @@ public abstract class InfoEntity implements Serializable {
          this.phones=phones;
     }
 
+    public InfoEntity(Address address, String email) {
+        this.address = address;
+        this.email = email;
+    }
+
     public Address getAddress() {
         return address;
     }
