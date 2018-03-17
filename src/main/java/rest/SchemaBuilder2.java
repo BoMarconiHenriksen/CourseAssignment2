@@ -22,13 +22,13 @@ public class SchemaBuilder2 {
 
         
 
-           puproperties3.put("javax.persistence.sql-load-script-source", "oneTimeSetupCa2.sql");
-           puproperties3.put("javax.persistence.sql-load-script-source", "scripts/populate_fixed.sql");
-        Persistence.generateSchema("Test_CourseAssignment2_war_1.0-SNAPSHOTPU", puproperties3);
-        puproperties3.remove("scripts/oneTimeSetupCa2.sql");
-        puproperties3.remove("scripts/dbdropAndCreatre.sql");
+//           puproperties3.put("javax.persistence.sql-load-script-source", "oneTimeSetupCa2.sql");
+//           puproperties3.put("javax.persistence.sql-load-script-source", "scripts/populate_fixed.sql");
+//        Persistence.generateSchema("TestCourseAssignment2_war_1.0-SNAPSHOTPU", puproperties3);
+//        puproperties3.remove("scripts/oneTimeSetupCa2.sql");
+//        puproperties3.remove("scripts/dbdropAndCreatre.sql");
 
-//        TestDataGenerator.fillTables();
+        TestDataGenerator.fillTables();
 
     }
 
