@@ -22,14 +22,15 @@ public class PersonMessage implements JSONMessage<Person> {
 
     public String firstName;
     public String lastName;
-    public int personId;
-    public List<Address> addresses;
+    public long personId;
+    //public Address address;//List<Address> addresses;
 
     public PersonMessage(Person p) {
-
-
+        this.personId = p.getId();
         this.firstName = p.getFirstName();
         this.lastName = p.getLastname();
+        //this.address = p.getAddress();
+        //this.addresses.add(p.getAddress());
 
     }
 
