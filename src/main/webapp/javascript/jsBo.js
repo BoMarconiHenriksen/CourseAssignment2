@@ -128,7 +128,7 @@ function findSingleUser(userInput) {
             })
             .then(data => { //nu er data klar
                 console.log(data);
-                console.log(data.firstName);
+            
 
                 const rows = data.map(user => `<tr>
                                                 <td>${user.personId}</td>

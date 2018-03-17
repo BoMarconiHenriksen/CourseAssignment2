@@ -44,7 +44,7 @@ public class TestDataGenerator {
         Address b;
 
         for (int i = 0; i < 100; i++) {
-            b = new Address(df.getStreetName(), getCityInfo(em).get((int) (Math.random() * 49)));
+            b = new Address(df.getStreetName(), getCityInfo(em).get((int) (Math.random() * 1013)));
             em.persist(b);
 
         }

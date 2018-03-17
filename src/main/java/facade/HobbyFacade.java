@@ -9,7 +9,7 @@ import javax.persistence.Query;
 
 public class HobbyFacade {
     
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
     EntityManager em = emf.createEntityManager();
 
     public List<Person> getPersonbyHobby(String description) {
@@ -23,11 +23,11 @@ public class HobbyFacade {
     
     public static void main(String[] args) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CourseAssignment2_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         HobbyFacade pf = new HobbyFacade();
-        System.out.println(pf.getPersonbyHobby("Brian"));
+        System.out.println(pf.getPersonbyHobby("Greg"));
         em.close();
     }
     

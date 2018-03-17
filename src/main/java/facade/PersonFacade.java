@@ -43,6 +43,8 @@ public class PersonFacade {
         List< Person>persons = (List< Person>) q.getResultList();
         return persons;
     }
+    
+    
     public static List <Hobby> findHobbiesById(Long id){
         return (List<Hobby>) hobbies.get(id);
         

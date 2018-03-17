@@ -36,9 +36,17 @@ public abstract class InfoEntity implements Serializable {
     public InfoEntity() {
     }
 
-    public InfoEntity(Address address, String email) {
+    public InfoEntity(Address address, String email, List<Phone>phones) {
         this.address = address;
         this.email = email;
+        this.phones=phones;
+    }
+
+    public InfoEntity(Long id, Address address, String email, List<Phone>phones) {
+        this.id = id;
+        this.address = address;
+        this.email = email;
+         this.phones=phones;
     }
 
     public Address getAddress() {
