@@ -77,7 +77,17 @@ public class PersonFacade {
 
     }
 
+  public HashMap<Integer,Person> getpersonsDebug(EntityManager em) {
 
+        Query q = em.createQuery("SELECT p FROM Person p");
+        List<Person> personnes = q.getResultList();
+      for (int i = 0; i<personnes.size(); i++){
+          persons.put(i, personnes.get(i));
+      }
+        
+        return persons;
+
+    }
 
     
 
@@ -94,10 +104,35 @@ public class PersonFacade {
     
     public static void main(String[] args) {
         PersonFacade pf= new PersonFacade();
-        System.out.println(pf.findPersonByName("Tim"));
-        System.out.println(pf.getpersonsbyCity("København K"));
-    
+        //System.out.println(pf.getpersonsDebug(pf.em));
+        HashMap<Integer,Person> testMap = pf.getpersonsDebug(pf.em);
+        Person p0 = testMap.get(0);
+        System.out.println(p0);
+        Long i0 = p0.getId();
+        System.out.println(i0);
+        
+        Person p1 = testMap.get(1);
+        System.out.println(p1);
+        Long i1 = p1.getId();
+        System.out.println(i1);
+        
+        Person p2 = testMap.get(2);
+        System.out.println(p2);
+        Long i2 = p2.getId();
+        System.out.println(i2);
+        
+        System.out.println("id nr 3: Chelsie Hurst");
+        //get id, getAddress,  get email, 
+        System.out.println(p2.getId());
+        System.out.println(p2.getAddress());
+        System.out.println(p2.getEmail());
+        
+        //System.out.println(pf.findPersonByName("Tim"));
+        //System.out.println(pf.getpersonsbyCity("København K"));
+        //System.out.println(PersonFacade.getpersons(em));
 //        System.out.println(pf.getpersonsbyCity("København K"));s
+
+
     }
 
 }

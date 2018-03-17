@@ -140,4 +140,3 @@ function findSingleUser(userInput) {
                 document.getElementById("error").innerText = error.message ;
             });
 }
-<
