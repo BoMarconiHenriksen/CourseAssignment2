@@ -161,7 +161,7 @@ public class TestDataGenerator {
         
         tdg.createTestCompanies(em);
         tdg.createPhones(em);
-System.out.println(tdg.getCityInfo(em));
+//System.out.println(tdg.getCityInfo(em));
         em.getTransaction().commit();
         em.close();
     }

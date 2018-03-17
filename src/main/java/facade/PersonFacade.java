@@ -15,12 +15,12 @@ public class PersonFacade {
    EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
     
     EntityManager em = emf.createEntityManager();
-  public static HashMap<Integer, Person> persons= new HashMap<>();
+  public static HashMap<Long, Person> persons= new HashMap<>();
     
   
     
     
-    public static void deletePersonById(EntityManager em, int personId) {
+    public static void deletePersonById(EntityManager em, Long personId) {
         Person p = getPerson(em, personId);
         em.getTransaction().begin();
 
@@ -56,19 +56,20 @@ public class PersonFacade {
 //                   o JOIN o.orderLineItems l JOIN l.product p JOIN p.supplier s WHERE s.sup_name = 'Tortuga Trading'")
 
  
-    public static HashMap<Integer,Person> getpersons(EntityManager em) {
+    public static HashMap<Long,Person> getpersons(EntityManager em) {
 
         Query q = em.createQuery("SELECT p FROM Person p");
         List<Person> personnes = q.getResultList();
-      for (int i = 0; i<personnes.size(); i++){
-          persons.put(i, personnes.get(i));
+      for (int i = 0; i<personnes.size(); i++){          
+          Long myLong = personnes.get(i).getId(); 
+          persons.put(myLong, personnes.get(i));//persons.put(i, personnes.get(i));
       }
         
         return persons;
 
     }
 
-  public static  Person getPerson(EntityManager em,int id) {
+  public static  Person getPerson(EntityManager em,Long id) {
         return getpersons(em).get(id);
 
     }

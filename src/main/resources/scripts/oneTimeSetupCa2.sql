@@ -16,32 +16,32 @@ CREATE DATABASE `ca2_test_databuilders`;
 USE `ca2_test_databuilders`;
 
 -- Vi starter med at lave en kopi af vores tabeller fra ca2_databuilders databasen til ca2_test_databuilders databasen. 
-CREATE TABLE ca2_test_databuilders.address LIKE ca2_databuilders.address;
+CREATE TABLE ca2_test_databuilders.address LIKE ca2_databuilders.ADDRESS;
 
 -- Laver en ny tabel, som hedder addressTest. 
-CREATE TABLE addressTest LIKE ca2_databuilders.address;
+CREATE TABLE addressTest LIKE ca2_databuilders.ADDRESS;
 
 -- Du 2 ovenstående sql statements gentages nu for hver tabel, så vi har muligheden for at teste mapper metoderne til alle tabellerne. 
-CREATE TABLE ca2_test_databuilders.cityinfo LIKE ca2_databuilders.address;
-CREATE TABLE cityinfoTest LIKE ca2_databuilders.cityinfo;
+CREATE TABLE ca2_test_databuilders.cityinfo LIKE ca2_databuilders.CITYINFO;
+CREATE TABLE cityinfoTest LIKE ca2_databuilders.CITYINFO;
 
-CREATE TABLE ca2_test_databuilders.company LIKE ca2_databuilders.company;
-CREATE TABLE companyTest LIKE ca2_databuilders.company;
+CREATE TABLE ca2_test_databuilders.company LIKE ca2_databuilders.COMPANY;
+CREATE TABLE companyTest LIKE ca2_databuilders.COMPANY;
 
-CREATE TABLE ca2_test_databuilders.hobby LIKE ca2_databuilders.hobby;
-CREATE TABLE hobbyTest LIKE ca2_databuilders.hobby;
+CREATE TABLE ca2_test_databuilders.hobby LIKE ca2_databuilders.HOBBY;
+CREATE TABLE hobbyTest LIKE ca2_databuilders.HOBBY;
 
-CREATE TABLE ca2_test_databuilders.infoentity LIKE ca2_databuilders.infoentity;
-CREATE TABLE infoentityTest LIKE ca2_databuilders.infoentity;
+CREATE TABLE ca2_test_databuilders.infoentity LIKE ca2_databuilders.INFOENTITY;
+CREATE TABLE infoentityTest LIKE ca2_databuilders.INFOENTITY;
 
-CREATE TABLE ca2_test_databuilders.person LIKE ca2_databuilders.person;
-CREATE TABLE personTest LIKE ca2_databuilders.person;
+CREATE TABLE ca2_test_databuilders.person LIKE ca2_databuilders.PERSON;
+CREATE TABLE personTest LIKE ca2_databuilders.PERSON;
 
-CREATE TABLE ca2_test_databuilders.person_hobby LIKE ca2_databuilders.person_hobby;
-CREATE TABLE person_hobbyTest LIKE ca2_databuilders.person_hobby;
+CREATE TABLE ca2_test_databuilders.person_hobby LIKE ca2_databuilders.PERSON_HOBBY;
+CREATE TABLE person_hobbyTest LIKE ca2_databuilders.PERSON_HOBBY;
 
-CREATE TABLE ca2_test_databuilders.phone LIKE ca2_databuilders.phone;
-CREATE TABLE phoneTest LIKE ca2_databuilders.phone;
+CREATE TABLE ca2_test_databuilders.phone LIKE ca2_databuilders.PHONE;
+CREATE TABLE phoneTest LIKE ca2_databuilders.PHONE;
 
 -- DEMO DATA TIL TEST
 
@@ -52,26 +52,6 @@ CREATE TABLE phoneTest LIKE ca2_databuilders.phone;
 
 -- !!!OBS Nedenstående skal ændres!!!
 -- Demo Data til zipcodelistTest
-INSERT INTO addressTest VALUES (1000,'København K');
-
--- Demo data til userlistTest 
-INSERT INTO cityinfoTest VALUES 
-	(1, 1000, 'ansat@ansat.dk', 'a', 'employee', 'Jens', 'Jensen', 'Flyvervej 1',40404040),
-    (2, 1000, 'kunde@kunde.dk', 'b', 'customer', 'Winnie', 'Hansen', 'Ved Søen 2', 50505050),
-    (4, 1000, 'kunde4@kunde.dk', 'b', 'customer', 'Hans', 'Hansen', 'Ved Søen 2', 50505050);
-    
-INSERT INTO companyTestt VALUES
-
-INSERT INTO hobbyTest VALUES
-
-INSERT INTO infoentityTest VALUES
-
-INSERT INTO personTest VALUES
-
-INSERT INTO person_hobbyTest VALUES
-
-INSERT INTO phoneTest VALUES
-
 
     
     
