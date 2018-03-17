@@ -1,6 +1,7 @@
 package facade;
 
 import entity.Hobby;
+import entity.InfoEntity;
 import entity.Person;
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +26,9 @@ public class PersonFacade {
         em.getTransaction().begin();
 
         em.remove(p);//createQuery("DELETE from person where ID="+personId);
-        
-        em.getTransaction().commit();
+    em.getTransaction().commit();
+ 
+      
     }
   
     public static void createPerson(EntityManager em, Person p) {
@@ -82,7 +84,7 @@ public class PersonFacade {
     
     EntityManager em = emf.createEntityManager();
         PersonFacade pf = new PersonFacade();
-        pf.deletePersonById(em, 785L);
+        pf.deletePersonById(em, 1L);
         
     }
 

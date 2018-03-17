@@ -5,14 +5,12 @@
  */
 package entity.JSONMessages;
 
+import entity.Address;
 import entity.InfoEntity;
 import entity.Phone;
 import facade.InfoEntityFacade;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -20,19 +18,24 @@ import javax.persistence.Persistence;
  */
 public class EntityMessage implements JSONMessage {
 
+    public Long id;
+    public Address address;
+    public String email;
+
+    public EntityMessage(InfoEntity ie) {
+        this.id = ie.getId();
+        this.address = ie.getAddress();
+        this.email = ie.getEmail();
+    }
+
     @Override
     public InfoEntity toInternal() {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
-
-        EntityManager em = emf.createEntityManager();
-        InfoEntityFacade ifa = new InfoEntityFacade();
-        InfoEntity ie = null;
-        List<Phone> phones = new ArrayList<>();
-        for (Phone id : phones) {
-            phones.add(ie.getPhones().get(id.getNumber()));
+        List<Phone> phoneys = new ArrayList<>();
+        for (Phone id : phoneys) {
+            phoneys.add(InfoEntityFacade.getPhones(id.number));
         }
-        return new InfoEntity(ie.getAddress(), ie.getEmail(), phones) {
+        return new InfoEntity(address, email, phoneys) {
         };
 
     }

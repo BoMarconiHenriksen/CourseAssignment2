@@ -100,7 +100,7 @@ public class PersonsResource {
 
         Person p = PersonFacade.getPerson(em, id);
         if (p==null) {
-            throw new PersonNotFoundException("No persons with that firstname");
+            throw new PersonNotFoundException("No person with that id");
 
         } else {
          

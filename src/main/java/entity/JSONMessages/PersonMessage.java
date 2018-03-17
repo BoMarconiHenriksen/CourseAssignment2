@@ -6,13 +6,10 @@
 package entity.JSONMessages;
 
 
-import entity.Address;
 import entity.Hobby;
 import entity.Person;
 import facade.HobbyFacade;
-import facade.PersonFacade;
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
