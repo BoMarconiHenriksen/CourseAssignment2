@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/CourseAssignment2">
-    <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="CA2" password="mysql" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/populate" username="root"/>
+    <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="CA2" password="password123" type="javax.sql.DataSource" url="jdbc:mysql://138.68.89.165:3306/ca2_databuilders" username="testuser"/>
 </Context>

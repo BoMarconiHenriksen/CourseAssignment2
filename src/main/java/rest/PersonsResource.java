@@ -15,6 +15,7 @@ import entity.JSONMessages.PersonMessage;
 import entity.Person;
 import facade.PersonFacade;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,7 +50,7 @@ public class PersonsResource {
     public PersonsResource() {
     }
 
-    @Path("{id}")
+       @Path("{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putPersonById(@PathParam("id") Long personId, String content) {
@@ -59,10 +60,11 @@ public class PersonsResource {
         deletePersonById(personId);
         PersonFacade.createPerson(em, pEnd);
 
-    }
-
+}
+ 
     @Path("{id}")
     @DELETE
+      @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public void deletePersonById(@PathParam("id") Long personId) {
         PersonFacade.deletePersonById(em, personId);

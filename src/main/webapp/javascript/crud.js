@@ -2,7 +2,7 @@ document.getElementById("btncrud").addEventListener("click", getUserInput);
 document.getElementById("crud").addEventListener("change", changeInputFields);
 
 function changeInputFields() {
-    event.stopPropagation();
+
     let changeSelection = document.getElementById("crud").value;
 
     if (changeSelection === "updatePerson") {
@@ -38,10 +38,10 @@ function getUserInput() {
 
         let firstName = document.getElementById("newFirstName").value;
         let lastName = document.getElementById("newLastName").value;
-        
+
         addUser(firstName, lastName);
 
-    } else if(ShowInput === "deletePerson") {
+    } else if (ShowInput === "deletePerson") {
         deleteUser(userInput);
     }
 
@@ -49,7 +49,7 @@ function getUserInput() {
 }
 
 function addUser(firstName, lastName) {
-    
+
     //clear the input fields
     document.getElementById("newFirstName").value = "";
     document.getElementById("newLastName").value = "";
@@ -57,22 +57,22 @@ function addUser(firstName, lastName) {
 //    document.getElementById("added").innerHTML = "The user was added.";
 
     var newUser = {
-        firstName: firstName,
-        lastName: lastName
+        'firstName': firstName,
+        'lastName': lastName
     }
 
     var settings = {
         body: JSON.stringify(newUser), // must match 'Content-Type' header. Fra java object til json
         headers: {
-            'content-type': 'application/json',
+            'content-type': 'application/json'
+        
           
-            
         },
         method: 'POST', // *GET, PUT, DELETE, etc.
     }
 
     fetch("https://benedikteeva.dk/CourseAssignment2-1.0-SNAPSHOT/api/persons", settings)
-            .then(res => res.json()) //ta json resopnse og send det videre
+            .then(res => res.json) //ta json resopnse og send det videre
 //            .then(data => document.getElementById("name").innerText = data.name) //data er bare et navn
 
 }
@@ -87,10 +87,13 @@ function deleteUser(userInput) {
     let urlDelete = baseUrl + userInput;
     console.log(urlDelete);
 
-    let settings = {
+    var settings = {
         body: JSON.stringify(), // must match 'Content-Type' header. Fra java object til json
+        
         headers: {
-            'Content-Type': 'application/json'
+            'content-type': 'application/json'
+        
+           
         },
         method: 'DELETE' // *GET, PUT, DELETE, etc.
     }
@@ -98,18 +101,18 @@ function deleteUser(userInput) {
     fetch(urlDelete, settings)
             .then(response => {
                 if (response.ok) {
-                    return response.json(); //res.jason hvis det er json
+                    return response.jason; //res.jason hvis det er json
                 }
                 throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
             })
             .then(data => { //nu er data klar
-console.log(data);                document.getElementById("added").innerHTML = "The user is deleted!";
+                console.log(data);
+                document.getElementById("added").innerHTML = "The user is deleted!";
             })
             .catch(error => {
                 document.getElementById("error").innerText = error.message;
             });
 }
-
 function changeUser(id, newFirstName, newLastName) {
     console.log("changeuser");
     console.log(id);
@@ -136,7 +139,7 @@ function changeUser(id, newFirstName, newLastName) {
                 }
 
                 //Hvis feltet er tomt indsættes det som står i json filen.
-                if (newLastName === undefined || newLastName === "") {
+                if (newLastName == undefined || newLastName === "") {
                     newLastName = data.lastName;
                 }
 
@@ -155,8 +158,8 @@ function changeUser(id, newFirstName, newLastName) {
                 }
 
                 fetch(urlToFetch, settings)
-                        .then(res => res.json()) //ta json resopnse og send det videre
-//            .then(data => document.getElementById("name").innerText = data.name) //data er bare et navn
+                        .then(res => res.jason)//ta json resopnse og send det videre
+                        .then(data=> document.getElementById("name").innerHTML ="Person with id no:  "+id+"  now has data:  FirstName: "+ newFirstName+" LastName: "+newLastName); //data er bare et navn
 
 
             })
@@ -167,7 +170,7 @@ function changeUser(id, newFirstName, newLastName) {
 }
 
 function htmlUpdatePerson() {
-    const htmlInputField = ` <p>If there is a part you dont want to cange let the input field be empty</p>
+    const htmlInputField = ` <p>If there is a part you dont want to change let the input field be empty</p>
                                 <div class='inputs form-group' id="btns">
                                     <p>Enter Id: </p>
                                     <input id="id" placeholder='Add the person id' />
