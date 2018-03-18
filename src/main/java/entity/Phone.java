@@ -15,7 +15,7 @@ public class Phone implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    private int number;
+    public int number;
     private String description;
     //Mange Phone kender en InfoEntity.
     @ManyToOne

@@ -1,3 +1,5 @@
+
+
 var userInput;
 
 document.getElementById("btnsend").addEventListener("click", getData);
@@ -25,7 +27,9 @@ function getData() {
 //show users
 function fetchAllPersons() {
 
-    fetch("https://benedikteeva.dk/CourseAssignment2%2D1.0%2DSNAPSHOT/api/persons") //returner objekt som promise
+
+    fetch("https://benedikteeva.dk/CourseAssignment2-1.0-SNAPSHOT/api/persons/") //returner objekt som promise
+
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -35,7 +39,7 @@ function fetchAllPersons() {
             })
             .then(data => { //nu er data klar
                 //Laver rækken
-                const rows = data.map(user => `<tr>
+                var  rows = data.map(user => `<tr>
                                                 <td>${user.personId}</td>
                                                 <td>${user.firstName}</td>
                                                 <td>${user.lastName}</td></tr>`).join("\n");
@@ -55,14 +59,14 @@ function fetchAllPersons() {
         `
                 document.getElementById("table").innerHTML = htmlTable;
             })
-            .catch(error => {
-                document.getElementById("error").innerText = error.message;
-            });
+           ;
 
 }
 
 function fetchAllCompanies()  {
-    fetch("https://benedikteeva.dk/CourseAssignment2%2D1.0%2DSNAPSHOT/api/companies") //returner objekt som promise
+
+    fetch("https://benedikteeva.dk/CourseAssignment2-1.0-SNAPSHOT/api/companies") //returner objekt som promise
+
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -71,12 +75,12 @@ function fetchAllCompanies()  {
             })
             .then(data => { //nu er data klar
                 //Laver rækken
-                const rows = data.map(companies => `<tr>
+                var crows = data.map(companies => `<tr>
                                                 <td>${companies.name}</td>
                                                 <td>${companies.description}</td>
                                                 <td>${companies.marketValue}</td></tr>`).join("\n");
                 //Her laves det som skal udskrives på htmlsiden                                
-                const htmlTable = `<table class="table">
+                const chtmlTable = `<table class="table">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -85,11 +89,11 @@ function fetchAllCompanies()  {
                         </tr>
                     </thead
                     <tbody>
-                    ${rows}
+                    ${crows}
                     </tbody>
                 </table>
         `
-                document.getElementById("table").innerHTML = htmlTable;
+                document.getElementById("table").innerHTML = chtmlTable;
             })
             .catch(error => {
                 document.getElementById("error").innerText = error.message;
@@ -98,7 +102,7 @@ function fetchAllCompanies()  {
 
 function findSingleUser(userInput) {
 
-    let baseUrl = "https://benedikteeva.dk/CourseAssignment2%2D1.0%2DSNAPSHOT/api/persons/";
+    let baseUrl = "https://benedikteeva.dk/CourseAssignment2-1.0-SNAPSHOT/api/persons/";
 
     let url = baseUrl + userInput;
     console.log(url);
@@ -112,9 +116,9 @@ function findSingleUser(userInput) {
             })
             .then(data => { //nu er data klar
                 console.log(data);
-            
+                console.log(data.firstName);
 
-                const rows = data.map(user => `<tr>
+                var rows = data.map(user => `<tr>
                                                 <td>${user.personId}</td>
                                                 <td>${user.firstName}</td>
                                                 <td>${user.lastName}</td></tr>`).join("\n");
@@ -137,7 +141,47 @@ function findSingleUser(userInput) {
 
             })
             .catch(error => {
-                document.getElementById("error").innerText = error.message ;
+                document.getElementById("error").innerText = error.message;
             });
 }
+            
 
+//function fetchAllInfoEntities() {
+//
+//
+//    fetch("https://benedikteeva.dk/CourseAssignment2-1.0-SNAPSHOT/api/ies/") //returner objekt som promise
+//
+//            .then(response => {
+//                if (response.ok) {
+//                    return response.json();
+//                }
+//                throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
+//      console.log(response.json());
+//            })
+//            .then(data => { //nu er data klar
+//                //Laver rækken
+//                const irows = data.map(ies => `<tr>
+//                                                <td>${ies.id}</td>
+//                                                <td>${ies.email}</td>
+//                                                <td>${ies.address}</td></tr>`).join("\n");
+//                //Her laves det som skal udskrives på htmlsiden                                
+//                const ihtmlTable = `<table class="table">
+//                    <thead>
+//                        <tr>
+//                            <th>Id</th>
+//                            <th>Email</th>
+//                            <th>Address</th>
+//                        </tr>
+//                    </thead
+//                    <tbody>
+//                    ${irows}
+//                    </tbody>
+//                </table>
+//        `
+//                document.getElementById("table").innerHTML = ihtmlTable;
+//            })
+//            .catch(error => {
+//                document.getElementById("error").innerText = error.message;
+//            });
+
+//}

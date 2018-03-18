@@ -30,6 +30,15 @@ public class Hobby implements Serializable {
     @ManyToMany(mappedBy = "hobbies")
     private List<Person> persons;
 
+    public Hobby(Long id, String name, String description, List<Person> persons) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.persons = persons;
+    }
+    
+    
+
     public Hobby(String name, String description, List<Person> persons) {
         this.name = name;
         this.description = description;
@@ -44,6 +53,10 @@ public class Hobby implements Serializable {
     public Hobby(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public Hobby(int hobbyId, String name, String description, List<Person> persons) {
+   
     }
 
   

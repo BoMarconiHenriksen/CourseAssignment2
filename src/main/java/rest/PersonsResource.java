@@ -15,6 +15,7 @@ import entity.JSONMessages.PersonMessage;
 import entity.Person;
 import facade.PersonFacade;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -32,13 +33,18 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
- * REST Web Service
- *
- * @author Ejer
+ * REST Web Service.
+ * PersonResource is one of the API'es configrued by the ApplicationConfig.
+ * This API is handling all the CRUD requests related to a person.
+ * This API is handling it's request by a Gson API, wich helps to conversate the code to a Json object.
+ * And Json is of curse also used in this API, to get this code translateable, readable to another resource, herby SQL.
+ * that makes it posible to write an sql quarry with javacode and then get a response from the SQL servere, wich in other cases would not understand -
+ * the java code in first place.
  */
 @Path("persons")
 public class PersonsResource {
- PersonFacade pf = new PersonFacade();
+
+    PersonFacade pf = new PersonFacade();
     Gson gson = new Gson();
     @Context
     private UriInfo context;
@@ -48,22 +54,23 @@ public class PersonsResource {
     public PersonsResource() {
     }
 
-    @Path("{id}")
+       @Path("{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putPersonById(@PathParam("id") int personId, String content) {
+    public void putPersonById(@PathParam("id") Long personId, String content) {
         Person pStart = PersonFacade.getPerson(em, personId);
         Person pEnd = MessageFacade.fromJson(content, PersonMessage.class);
         pEnd.setId(pStart.getId());
         deletePersonById(personId);
         PersonFacade.createPerson(em, pEnd);
 
-    }
-
+}
+ 
     @Path("{id}")
     @DELETE
+      @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deletePersonById(@PathParam("id") int personId) {
+    public void deletePersonById(@PathParam("id") Long personId) {
         PersonFacade.deletePersonById(em, personId);
     }
 
@@ -93,22 +100,24 @@ public class PersonsResource {
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonById(@PathParam("id") Integer id) {
+    public String getPersonById(@PathParam("id") Long id) {
 
         ArrayList<JSONMessage> messages = new ArrayList<>();
 
-        Person p=PersonFacade.getPerson(em, id);
-            if (p == null) {
+        Person p = PersonFacade.getPerson(em, id);
+        if (p==null) {
             throw new PersonNotFoundException("No person with that id");
 
-
+        } else {
+         
+               messages.add(new PersonMessage(p));
             }
-            messages.add(new PersonMessage(p));
-    
-        return gson.toJson(messages);
+        
 
+        return gson.toJson(messages);
     }
- @Path("firstName/{firstName}")
+
+    @Path("firstName/{firstName}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getPersonByFirstName(@PathParam("firstName") String firstName) {
@@ -128,5 +137,5 @@ public class PersonsResource {
 
         }
 
-}
+    }
 }

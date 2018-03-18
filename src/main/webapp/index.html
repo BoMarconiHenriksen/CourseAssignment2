@@ -31,7 +31,7 @@
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">Datamatiker Uddannelsen</a>
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">Course Assignment 2 - 3. semester - The DataBuilders</a>
                 <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fa fa-bars"></i>
@@ -67,7 +67,7 @@
         <!-- Portfolio Grid Section -->
         <section class="portfolio" id="portfolio">
             <div class="container">
-                <h2 class="text-center text-uppercase text-secondary mb-0">Portfolio</h2>
+                <h2 class="text-center text-uppercase text-secondary mb-0">Find Persons</h2>
                 <hr class="star-dark mb-5">
 
                 <!--<div class="search-container" style="float:right;">
@@ -97,9 +97,9 @@
                         <div class="form-inline">
                             <div>
                                 <select id="crud" class="dropbtn form-group"  >
-                                    <option>Update Person</option>
-                                    <option>Delete Person</option>
-                                    <option>Enter New Person</option>
+                                    <option value="deletePerson">Delete Person By Id</option>
+                                    <option value="updatePerson">Update Person</option>
+                                    <option value="newPerson">Enter New Person</option>
                                 </select>
                             </div>
 
@@ -112,55 +112,34 @@
                         </div>
                     </div>
                 </div>
-                <!--<div class="dropdown">
-
-
-                    <button class="dropbtn">Get information</button>
-                    <div class="dropdown-content">
-                        <div class="form-inline">
-
-                            <div class="form-group">
-                                <label for="personFirstname"> Person Firstname: </label>
-                                <input type="text" name="pName"><br>
-                            </div>
-                            <div class="form-group">
-                                <label for="personPhone"> Person Phone Number: </label>
-                                <input type="number" name="pPhone"><br>
-                            </div>
-                            <div class="form-group">
-                                <label> Person Hobby: </label><input class="form-control" type="text" id="pAddress" > 
-                            </div>
-                            <div class="form-group">
-                                <label for="personHobby"> Person Phone Number: </label>
-                                <input type="text" name="pHobby"><br>
-                            </div>
-                            <div class="form-group">
-                                <label for="zipCodes"> Zip Codes: </label>
-                                <input type="number" name="zip"><br>
-                            </div>
-                        </div>
-                    </div>-->
 
                 <br/>
                 <div class="row form-inline">
 
                     <!--Printer tabel-->
                     <div class="col-md-6" id="table">
-                        
+
                         <!--Printer fejlmeddelse-->
                         <div class="col-md-6" id="error"></div>
 
                     </div>
-                    
+                    <!--Printer tabel-->
+                    <div class="col-md-6" id="table">
+
+                        <!--name-->
+                        <div class="col-md-6" id="name"></div>
+
+                    </div>
                     <!--Printer crud-->
                     <div class="col-md-6" id="showcrud">
-                        
+                        <!--the user was added-->
+                        <div id="added"></div>
                         <!--Printer fejlmeddelse-->
                         <div class="col-md-6" id="errorcrud"></div>
 
                     </div>
+                </div> 
 
-                </div>
             </div>
 
         </section>
@@ -171,6 +150,24 @@
                 <h2 class="text-center text-uppercase text-white">About Life</h2>
                 <hr class="star-light mb-5">
                 <div class="row">
+                    <div class="col-lg-4 mr-auto">
+                        <p class="lead">API-description: <br>
+
+                            Get a list of all persons                                Yes <br>
+                            Get id, firstname and lastname on a single person                Yes <br>
+                            Get List of all companies                            Yes     <br>
+                            Get person by firstname (but you need firstName/someName)            Yes <br>
+                            Get information about a person (address, hobbies etc) given a phone number     No <br>
+                            Get information about a company given a phone number or cvr.            No <br>
+                            Get all persons with a given hobby                        No <br>
+                            Get all persons living in a given city (i.e. 2800 Lyngby)                No <br>
+                            Get the count of people with a given hobby                    No <br>
+                            Get a list of all zip codes in denmark                        No <br>
+                            Get a list of companies with more than xx employes                No <br>
+                            Create new person (NoHobbies)                            Yes <br>
+                            Delete person (some users aren’t deletable weird)                Some <br>
+                            Update person(The user gets new number)                    No  <br></p>
+                    </div>
                     <div class="col-lg-4 ml-auto">
                         <p class="lead">Lightsabers are red
                             <br>Lightsabers are blue
@@ -179,14 +176,15 @@
                     </div>
                     <div class="col-lg-4 mr-auto">
                         <p class="lead">Then we sat on the sand for some time and observed 
-<br>How the oceans that cover the world were perturbed 
-<br>By the tides from the orbiting moon overhead 
-<br>'How relaxing the sound of the waves is,' you said. 
-<br>I began to expound upon tidal effects 
-<br>When you asked me to stop, looking somewhat perplexed. 
-<br>So I did not explain why the sunset turns red 
-<br>And we watched the occurrence, in silence, instead. </p>
+                            <br>How the oceans that cover the world were perturbed 
+                            <br>By the tides from the orbiting moon overhead 
+                            <br>'How relaxing the sound of the waves is,' you said. 
+                            <br>I began to expound upon tidal effects 
+                            <br>When you asked me to stop, looking somewhat perplexed. 
+                            <br>So I did not explain why the sunset turns red 
+                            <br>And we watched the occurrence, in silence, instead. </p>
                     </div>
+
                 </div>
                 <div class="text-center mt-4">
                     <a class="btn btn-xl btn-outline-light" href="#">
@@ -408,9 +406,8 @@
         <script src="bootstrap/js/freelancer.js" type="text/javascript"></script>
 
 
-
         <script src="javascript/crud.js" type="text/javascript"></script>
-        <script src="javascript/jsBenedikte.js" type="text/javascript"></script>
+        <!--script src="javascript/jsBenedikte.js" type="text/javascript"></script-->
 
         <script src="javascript/jsBo.js" type="text/javascript"></script>
         <script src="javascript/jsChristian.js" type="text/javascript"></script>
