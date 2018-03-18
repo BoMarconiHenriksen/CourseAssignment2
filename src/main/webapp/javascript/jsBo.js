@@ -39,7 +39,7 @@ function fetchAllPersons() {
             })
             .then(data => { //nu er data klar
                 //Laver rækken
-                const rows = data.map(user => `<tr>
+                var  rows = data.map(user => `<tr>
                                                 <td>${user.personId}</td>
                                                 <td>${user.firstName}</td>
                                                 <td>${user.lastName}</td></tr>`).join("\n");
@@ -75,7 +75,7 @@ function fetchAllCompanies()  {
             })
             .then(data => { //nu er data klar
                 //Laver rækken
-                const crows = data.map(companies => `<tr>
+                var crows = data.map(companies => `<tr>
                                                 <td>${companies.name}</td>
                                                 <td>${companies.description}</td>
                                                 <td>${companies.marketValue}</td></tr>`).join("\n");
@@ -118,7 +118,7 @@ function findSingleUser(userInput) {
                 console.log(data);
                 console.log(data.firstName);
 
-                const rows = data.map(user => `<tr>
+                var rows = data.map(user => `<tr>
                                                 <td>${user.personId}</td>
                                                 <td>${user.firstName}</td>
                                                 <td>${user.lastName}</td></tr>`).join("\n");

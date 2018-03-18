@@ -20,7 +20,9 @@ public class PersonFacade {
         em.getTransaction().begin();
 
         em.remove(p);//createQuery("DELETE from person where ID="+personId);
+    
         em.getTransaction().commit();
+        persons.remove(personId);
 
     }
 
@@ -29,11 +31,13 @@ public class PersonFacade {
 
         em.persist(p);
         em.getTransaction().commit();
-        em.close();
+     
 
     }
 
     public static void addPerson(EntityManager em, Long id, Person p) {
+       
+           persons.remove(id);
         createPerson(em, p);
         persons.put(id, p);
     }
@@ -49,8 +53,8 @@ public class PersonFacade {
     public List<Person> getpersonsbyCity(String city) {
 
         Query q = em.createQuery("SELECT p FROM Person p, Address a, CityInfo c,  join p.address=a.cityinfo WHERE a.cityinfo=:city");
-        List<Person> persons = q.getResultList();
-        return persons;
+        List<Person> citizens = q.getResultList();
+        return citizens;
 
     }
 //    em.createQuery("SELECT MAX(p.price) FROM PurchaseOrder 
