@@ -33,13 +33,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
- * REST Web Service.
- * PersonResource is one of the API'es configrued by the ApplicationConfig.
- * This API is handling all the CRUD requests related to a person.
- * This API is handling it's request by a Gson API, wich helps to conversate the code to a Json object.
- * And Json is of curse also used in this API, to get this code translateable, readable to another resource, herby SQL.
- * that makes it posible to write an sql quarry with javacode and then get a response from the SQL servere, wich in other cases would not understand -
- * the java code in first place.
+ * REST Web Service
+ *
  * @author Ejer
  */
 @Path("persons")
