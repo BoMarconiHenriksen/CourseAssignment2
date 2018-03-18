@@ -4,7 +4,13 @@ package rest;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
-
+    
+    /**
+     * ApplicationConfig is the main java class that represents all resources api's.
+     * You run it by naviagting to the application path in yo url.
+     * You can further run the given resource by navigating further to the given resource.
+     *
+     */
 
 @ApplicationPath("api")
 public class ApplicationConfig extends Application {
