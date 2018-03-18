@@ -38,7 +38,7 @@
             <version>3.0.7</version>
             <scope>test</scope>
         </dependency>
-  
+
         <dependency>
             <groupId>org.glassfish.jersey.bundles</groupId>
             <artifactId>jax-rs-ri</artifactId>
@@ -85,6 +85,7 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+        
     </dependencies>
 
 

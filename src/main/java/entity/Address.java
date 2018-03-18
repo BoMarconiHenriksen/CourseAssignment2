@@ -18,7 +18,7 @@ public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
     private String street;
     
     //Denne referer til cityInfo. Mange Address kender en CityInfo
@@ -30,6 +30,12 @@ public class Address implements Serializable {
     private List<InfoEntity> infoEntities = new ArrayList();
 
     public Address(String street, CityInfo cityinfo) {
+        this.street = street;
+        this.cityinfo = cityinfo;
+    }
+
+    public Address(Long id, String street, CityInfo cityinfo) {
+        this.id = id;
         this.street = street;
         this.cityinfo = cityinfo;
     }

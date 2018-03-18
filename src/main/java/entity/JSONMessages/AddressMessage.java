@@ -7,40 +7,53 @@ package entity.JSONMessages;
 
 
 import entity.Address;
+import entity.CityInfo;
+import entity.InfoEntity;
 import entity.Person;
+import entity.Phone;
+import facade.InfoEntityFacade;
 import facade.PersonFacade;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 
 /**
  *
  * @author Ejer
  */
-//public class AddressMessage implements JSONMessage<Address> {
-//
-//    public String streetName;
-//    public int zip;
-//    public int id;
-//    public List<Person> persons;
-////
-//    public AddressMessage(Address a) {
-//        this.streetName = a.getStreetName();
-//        this.zip = a.getZip();
-//        this.id = a.getId();
-//        this.persons=a.getPersons();
-//    }
-//
-//    @Override
-//    public Address toInternal() {
-//   
-//        ArrayList<Person> personnes = new ArrayList<>();
-//        for (Person id :personnes) {
-//            personnes.add(PersonFacade.getPerson(id.getPersonId()));
-//        }
-//        return new Address(streetName, zip, id, personnes);
-//    }
+public class AddressMessage implements JSONMessage<Address> {
 
+    public String streetName;
+    public int zip;
+    public long id;
+    public List<InfoEntity> inforentities;
+    private  CityInfo CityInfo;
+//
+    public AddressMessage(Address a) {
+       this.CityInfo=a.getCityinfo();
+        this.id = a.getId();
+        this.inforentities=a.getInfoEntities();
+    }
+
+    @Override
+    public Address toInternal() {
+        return null;
+        
+//         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeployedCourseAssignment2_war_1.0-SNAPSHOTPU");
+//    
+//    EntityManager em = emf.createEntityManager();
+//   InfoEntityFacade ifa = new InfoEntityFacade();
+//   InfoEntity ie = null;
+//        List<Phone> phones = new ArrayList<>();
+//        for (Phone id : phones) {
+//            phones.add(ie.getPhones().get(id.getNumber()));
+//        }
+//        return new InfoEntity( ie.getId(),ie.getAddress(),ie.getEmail(), phones) {};
+//    
+    }}
    
   
   

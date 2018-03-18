@@ -1,7 +1,6 @@
 package facade;
 
 import entity.Company;
-import static facade.PersonFacade.persons;
 import java.util.HashMap;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -40,7 +39,8 @@ public class CompanyFacade {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         CompanyFacade compaf = new CompanyFacade();
-        System.out.println(compaf.findCompanyByName(em, "Cairo Motors"));
+        System.out.println(compaf.findCompanyByName(em, "Jesup Travel"));
+        System.out.println(compaf.getCompanies(em));
         em.close();
     }
     

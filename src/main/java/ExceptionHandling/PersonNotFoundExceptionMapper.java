@@ -31,7 +31,7 @@ public class PersonNotFoundExceptionMapper implements ExceptionMapper<PersonNotF
         ErrorMessage err = new ErrorMessage(exception, 404, isDebug);
         err.setMessage(exception.getMessage());
 
-        err.setDescription("You should do something else");
+        err.setDescription("We dont have a person with that criteria. But no worries, you can buy one at your local store!");
 
         return Response.status(404)
                 .entity(gson.toJson(err))

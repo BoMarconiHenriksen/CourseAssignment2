@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,21 +23,39 @@ public abstract class InfoEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-    
+
     //Mange InfoEntity kender en Address
     @ManyToOne
     private Address address;
-    
     //En InfoEntity kender mange Phone.
-    @OneToMany(mappedBy = "infoEntity")
-    private List<Phone> phones = new ArrayList();
+    
+   
+    @OneToMany(mappedBy = "infoEntity",cascade=CascadeType.PERSIST)
+    private List<Phone> phones;
 
     private String email;
 
     public InfoEntity() {
+        this.phones = new ArrayList();
+    }
+
+    public InfoEntity(Address address, String email, List<Phone> phones) {
+        this.phones = new ArrayList();
+        this.address = address;
+        this.email = email;
+        this.phones = phones;
+    }
+
+    public InfoEntity(Long id, Address address, String email, List<Phone> phones) {
+        this.phones = new ArrayList();
+        this.id = id;
+        this.address = address;
+        this.email = email;
+        this.phones = phones;
     }
 
     public InfoEntity(Address address, String email) {
+        this.phones = new ArrayList();
         this.address = address;
         this.email = email;
     }
